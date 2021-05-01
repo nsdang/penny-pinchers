@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+exports.DataAccess = void 0;
 var Mongoose = require("mongoose");
 var DataAccess = /** @class */ (function () {
     function DataAccess() {
@@ -15,7 +16,7 @@ var DataAccess = /** @class */ (function () {
         this.mongooseInstance = Mongoose.connect(this.DB_CONNECTION_STRING);
         return this.mongooseInstance;
     };
-    DataAccess.DB_CONNECTION_STRING = 'mongodb://dbAdmin:test@localhost:3000/toDoSample?authSource=admin';
+    DataAccess.DB_CONNECTION_STRING = 'mongodb://pinchers/KXy35VTdZ7ak0v1M@localhost:3000/';
     return DataAccess;
 }());
 exports.DataAccess = DataAccess;
