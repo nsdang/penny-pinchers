@@ -16,7 +16,7 @@ var DataAccess = /** @class */ (function () {
         this.mongooseInstance = Mongoose.connect(this.DB_CONNECTION_STRING);
         return this.mongooseInstance;
     };
-    DataAccess.DB_CONNECTION_STRING = 'mongodb://pinchers/KXy35VTdZ7ak0v1M@localhost:3000/';
+    DataAccess.DB_CONNECTION_STRING = 'mongodb+srv://pinchers:KXy35VTdZ7ak0v1M@penny-pinchers1.jss5q.mongodb.net/test1?retryWrites=true&w=majority';
     return DataAccess;
 }());
 exports.DataAccess = DataAccess;

@@ -36,4 +36,4 @@ class SubListModel {
         });
     }
 }
-export {ISubListModel};
+export {SubListModel};

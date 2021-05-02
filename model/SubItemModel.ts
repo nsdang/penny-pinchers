@@ -4,7 +4,7 @@ import {ISubItemModel} from '../interfaces/ISubItemModel'
 
 let mongooseConnection = DataAccess.mongooseConnection;
 
-class ItemModel {
+class SubItemModel {
     public schema:any;
     public innerSchema:any;
     public model:any;
@@ -44,6 +44,7 @@ class ItemModel {
         });
     }
 }
+export {SubItemModel};
 
 
 

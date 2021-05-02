@@ -7,17 +7,21 @@ import * as bodyParser from 'body-parser';
 //var MongoClient = require('mongodb').MongoClient;
 //var Q = require('q');
 
-import {ListModel} from './model/ListModel';
-import {TaskModel} from './model/TaskModel';
+//import {ListModel} from './model/ListModel';
+//import {TaskModel} from './model/TaskModel';
 //import {DataAccess} from './DataAccess';
+import {SubListModel} from './model/SubListModel'
+import {SubItemModel} from './model/SubItemModel'
 
 // Creates and configures an ExpressJS web server.
 class App {
 
   // ref to Express instance
   public expressApp: express.Application;
-  public Lists:ListModel;
-  public Tasks:TaskModel;
+ // public Lists:ListModel;
+ // public Tasks:TaskModel;
+  public SubscriptionList:SubListModel;
+  public SubscriptionItem:SubItemModel;
   public idGenerator:number;
 
   //Run configuration methods on the Express instance.
@@ -26,8 +30,10 @@ class App {
     this.middleware();
     this.routes();
     this.idGenerator = 102;
-    this.Lists = new ListModel();
-    this.Tasks = new TaskModel();
+    //this.Lists = new ListModel();
+    //this.Tasks = new TaskModel();
+    this.SubscriptionItem = new SubItemModel();
+    this.SubscriptionList = new SubListModel();
   }
 
   // Configure Express middleware.
@@ -43,18 +49,19 @@ class App {
     router.get('/app/list/:listId/count', (req, res) => {
         var id = req.params.listId;
         console.log('Query single list with id: ' + id);
-        this.Tasks.retrieveTasksCount(res, {listId: id});
+       // this.Tasks.retrieveTasksCount(res, {listId: id});
     });
 
     router.post('/app/list/', (req, res) => {
         console.log(req.body);
         var jsonObj = req.body;
         //jsonObj.listId = this.idGenerator;
-        this.Lists.model.create([jsonObj], (err) => {
+       /* this.Lists.model.create([jsonObj], (err) => {
             if (err) {
                 console.log('object creation failed');
             }
         });
+        */
         res.send(this.idGenerator.toString());
         this.idGenerator++;
     });
@@ -62,17 +69,17 @@ class App {
     router.get('/app/list/:listId', (req, res) => {
         var id = req.params.listId;
         console.log('Query single list with id: ' + id);
-        this.Tasks.retrieveTasksDetails(res, {listId: id});
+        //this.Tasks.retrieveTasksDetails(res, {listId: id});
     });
 
     router.get('/app/list/', (req, res) => {
         console.log('Query All list');
-        this.Lists.retrieveAllLists(res);
+        //this.Lists.retrieveAllLists(res);
     });
 
     router.get('/app/listcount', (req, res) => {
       console.log('Query the number of list elements in db');
-      this.Lists.retrieveListCount(res);
+     // this.Lists.retrieveListCount(res);
     });
 
     this.expressApp.use('/', router);
