@@ -94,6 +94,30 @@ class App {
      // this.Lists.retrieveListCount(res);
     });
 
+////// get all items
+    router.get('/app/list/:listId', function (req, res) { //?????????????
+      console.log('Query all items in the list in db');
+      this.SubscriptionItem.retrieveAllItems(res);
+    });
+
+    // create new item
+    router.post('/app/list/', function (req, res) {
+      console.log(req.body);
+      var jsonObj = req.body;
+      //jsonObj.listId = this.idGenerator;
+      this.SubsciptionItem.model.create([jsonObj], function (err) {
+          if (err) {
+              console.log('object creation failed');
+          }
+      });
+      res.send(this.idGenerator.toString());
+      this.idGenerator++;
+    });
+
+    
+    
+
+
     this.expressApp.use('/', router);
 
     this.expressApp.use('/app/json/', express.static(__dirname+'/app/json'));
