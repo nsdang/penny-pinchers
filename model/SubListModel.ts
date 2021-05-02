@@ -20,6 +20,15 @@ class SubListModel {
                 name: String,
                 description: String,
                 userId: Number,
+                itemList: [
+                    { 
+                        serviceName: String,
+                        addDate: Date,
+                        dueDate: Date,
+                        price: Number,
+                        isArchived: Boolean,
+                    }
+                ]
             },
         );
     }
@@ -29,7 +38,7 @@ class SubListModel {
     }
 
     // return the list details (name, desc,...)
-    public retrieveListDetails(response:any, filter:Object):any {
+    public retrieveAllItems(response:any, filter:Object):any {
         var query = this.model.findOne(filter); // find the list according to owner/userId?
         query.exec((err, list) => {
             response.json(list);

@@ -11,7 +11,6 @@ import * as bodyParser from 'body-parser';
 //import {TaskModel} from './model/TaskModel';
 //import {DataAccess} from './DataAccess';
 import {SubListModel} from './model/SubListModel'
-import {SubItemModel} from './model/SubItemModel'
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -21,7 +20,6 @@ class App {
  // public Lists:ListModel;
  // public Tasks:TaskModel;
   public SubscriptionList:SubListModel;
-  public SubscriptionItem:SubItemModel;
   public idGenerator:number;
 
   //Run configuration methods on the Express instance.
@@ -30,9 +28,6 @@ class App {
     this.middleware();
     this.routes();
     this.idGenerator = 102;
-    //this.Lists = new ListModel();
-    //this.Tasks = new TaskModel();
-    this.SubscriptionItem = new SubItemModel();
     this.SubscriptionList = new SubListModel();
   }
 
@@ -97,7 +92,7 @@ class App {
 ////// get all items
     router.get('/app/list/:listId', function (req, res) { //?????????????
       console.log('Query all items in the list in db');
-      this.SubscriptionItem.retrieveAllItems(res);
+      this.SubscriptionList.retrieveAllItems(res);
     });
 
     // create new item
@@ -105,7 +100,7 @@ class App {
       console.log(req.body);
       var jsonObj = req.body;
       //jsonObj.listId = this.idGenerator;
-      this.SubsciptionItem.model.create([jsonObj], function (err) {
+      this.SubscriptionList.model.create([jsonObj], function (err) {
           if (err) {
               console.log('object creation failed');
           }
@@ -113,10 +108,6 @@ class App {
       res.send(this.idGenerator.toString());
       this.idGenerator++;
     });
-
-    
-    
-
 
     this.expressApp.use('/', router);
 
