@@ -14,14 +14,23 @@ var SubListModel = /** @class */ (function () {
             listId: Number,
             name: String,
             description: String,
-            userId: Number
+            userId: Number,
+            itemList: [
+                {
+                    serviceName: String,
+                    addDate: Date,
+                    dueDate: Date,
+                    price: Number,
+                    isArchived: Boolean
+                }
+            ]
         });
     };
     SubListModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("SubscriptionList", this.schema);
     };
     // return the list details (name, desc,...)
-    SubListModel.prototype.retrieveListDetails = function (response, filter) {
+    SubListModel.prototype.retrieveAllItems = function (response, filter) {
         var query = this.model.findOne(filter); // find the list according to owner/userId?
         query.exec(function (err, list) {
             response.json(list);
