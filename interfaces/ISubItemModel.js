@@ -1,2 +1,2 @@
 "use strict";
-export.__esModule = true;
+exports.__esModule = true;

@@ -1,5 +1,5 @@
 import Mongoose = require("mongoose");
-import { DataAccess } from "../../Hilerio-repo/MongooseDB/DataAccess";
+import { DataAccess } from "../DataAccess";
 import {ISubListModel} from '../interfaces/ISubListModel'
 
 let mongooseConnection = DataAccess.mongooseConnection;
@@ -16,6 +16,7 @@ class SubListModel {
     public createSchema():void {
         this.schema = new Mongoose.Schema(
             {
+                listId: Number,
                 name: String,
                 description: String,
                 owner: String,
@@ -24,11 +25,12 @@ class SubListModel {
     }
 
     public createModel():void{
-        this.model = mongooseConnection.Model<ISubListModel>("SubscriptionList", this.schema);
+        this.model = mongooseConnection.model<ISubListModel>("SubscriptionList", this.schema);
     }
 
-    public retrieveList(response:any):any {
-        var query = this.model.find({});
+    // return the list details (name, desc,...)
+    public retrieveListDetails(response:any, filter:Object):any {
+        var query = this.model.findOne(filter); // find the list according to owner/userId?
         query.exec((err, list) => {
             response.json(list);
         });
