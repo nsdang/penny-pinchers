@@ -1,6 +1,7 @@
 import Mongoose = require("mongoose");
 
 interface IUserModel extends Mongoose.Document {
+    userId: number;
     username: string;
     password: string;
     fname: string;

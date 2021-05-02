@@ -14,7 +14,7 @@ var SubListModel = /** @class */ (function () {
             listId: Number,
             name: String,
             description: String,
-            owner: String
+            userId: Number
         });
     };
     SubListModel.prototype.createModel = function () {

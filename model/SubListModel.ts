@@ -19,7 +19,7 @@ class SubListModel {
                 listId: Number,
                 name: String,
                 description: String,
-                owner: String,
+                userId: Number,
             },
         );
     }

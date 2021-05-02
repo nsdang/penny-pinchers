@@ -46,6 +46,18 @@ class App {
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
+
+    /******************************************************
+     * ***************Penny-pinchers' Router*******************
+     ******************************************************/
+     router.put("/app/items/:itemId", (req, res) => {
+      console.log(req.body);
+      var jsonObj = req.body;
+      //update existed record
+      res.send("PUT: /app/items/:itemId");
+    });
+
+
     router.get('/app/list/:listId/count', (req, res) => {
         var id = req.params.listId;
         console.log('Query single list with id: ' + id);

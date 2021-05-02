@@ -4,7 +4,7 @@ interface ISubListModel extends Mongoose.Document {
     listId : number;
     name: string;
     description: string;
-    owner: string
+    userId: number;
 }
 
 export{ISubListModel};

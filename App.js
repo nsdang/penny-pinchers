@@ -37,6 +37,15 @@ var App = /** @class */ (function () {
     App.prototype.routes = function () {
         var _this = this;
         var router = express.Router();
+        /******************************************************
+         * ***************Penny-pinchers' Router*******************
+         ******************************************************/
+        router.put("/app/items/:itemId", function (req, res) {
+            console.log(req.body);
+            var jsonObj = req.body;
+            //update existed record
+            res.send("PUT: /app/items/:itemId");
+        });
         router.get('/app/list/:listId/count', function (req, res) {
             var id = req.params.listId;
             console.log('Query single list with id: ' + id);
