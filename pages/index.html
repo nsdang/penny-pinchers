@@ -5,10 +5,36 @@
 
 <!-- Set the page to the width of the device and set the zoon level -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Penny Pinching site</title>
+<title>Bootstrap Tutorial</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
 <style>
+#ref {
+  -webkit-box-reflect: below -16px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.2));
+}
+#shade{
+border: 3px solid;
+  padding: 10px;
+  box-shadow: 2px 0px;
+}
+
+#grad1 {
+  height: 1500px;
+background: #e52d27;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #b31217, #e52d27);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #b31217, #e52d27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */}
+#grad2 {
+background: #1488CC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2B32B2, #1488CC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2B32B2, #1488CC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#grad3
+{
+background: #e1eec3;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f05053, #e1eec3);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f05053, #e1eec3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 .p1 {
   font-family: Impact, Haettenschweiler, "Franklin Gothic Bold";
   font-size: 30px;
@@ -42,16 +68,16 @@ input.big-checkbox {width: 100px; height: 40px;}
 </style>
 
 </head>
-<body style="background-color:#FF3D12;">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#458CFF;">
-  <a class="navbar-brand" href="#"><p class="p1">Logged in as AJ</p></a>
+<body id="grad1">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#458CFF;" id="grad2">
+  <a class="navbar-brand" href="#"><p class="p1" style="color: red; text-shadow: 2px 2px 4px #000000;">Logged in as AJ</p></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><p>About </p><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#" style="color: white; text-shadow: 2px 2px 4px #000000; font-size:20px;"><p>About </p><span class="sr-only">(current)</span></a>
       </li>
     </ul>
   </div>
@@ -63,17 +89,18 @@ input.big-checkbox {width: 100px; height: 40px;}
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent" bg-812F1D>
-    <ul class="nav flex-column" style="background-color:#458CFF;">
-      <li class="nav-item active" align="center">
-        <a class="nav-link" href="#"><input type="image" src="plus.png" alt="Submit" width="48" height="48"> <span class="sr-only">(current)</span></a>
+    <ul id="grad2"class="nav flex-column" style="background-color:#458CFF;">
+      <li id="shade"class="nav-item active" align="center">
+        <a id="ref2"class="nav-link" href="#"><input type="image" src="plus.png" alt="Submit" width="48" height="48"> <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item" align="center">
-        <a class="nav-link" href="#"><input type="image" src="profile.png" alt="Submit" width="48" height="48"></a>
+      <li id="shade" class="nav-item" align="center">
+        <a id="ref2"class="nav-link" href="#"><input type="image" src="profile.png" alt="Submit" width="48" height="48"></a>
       </li>
-      <li class="nav-item" align="center">
-        <a class="nav-link" href="#"><input type="image" src="list.png" alt="Submit" width="48" height="48"></a>
+      <li id="shade" class="nav-item" align="center">
+        <a id="ref2" class="nav-link" href="#"><input type="image" src="list.png" alt="Submit" width="48" height="48"></a>
       </li>
     </ul>
+
 
 <!-- <a class="navbar-brand" href="#">Subscriber Item List PAGE</a> -->
 
@@ -87,9 +114,9 @@ input.big-checkbox {width: 100px; height: 40px;}
 
 <!-- CONTAINERS -->
 <!-- container puts padding around itself while container-fluid fills the whole screen. Bootstap grids require a container. -->
-<div class="container">
+<div class="container" id="ref"> 
 
-	<div class = "jumbotron">
+	<div class = "jumbotron" id="grad3">
 
 		<div class="row align-items-center">
 
@@ -195,8 +222,8 @@ input.big-checkbox {width: 100px; height: 40px;}
 	
 <div class="row align-items-center" align="center" style="padding:20px;">
 	<div class="col col-lg-2" style="width: 200px;" align ="center">	
-	<a class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#458CFF;">
-Delete Item</a>
+	<a id="grad2"class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#458CFF;">
+Delete Item(s)</a>
 </div>
 </div>
 </div>
