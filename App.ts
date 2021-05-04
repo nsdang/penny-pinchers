@@ -44,12 +44,6 @@ class App {
     /******************************************************
      * ***************Penny-pinchers' Router*******************
      ******************************************************/
-    router.put("/app/items/:itemId", (req, res) => {
-      console.log(req.body);
-      var jsonObj = req.body;
-      //update existed record
-      res.send("PUT: /app/items/:itemId");
-    });
 
     // get all items
     router.get("/app/list/:listId", function (req, res) {
@@ -70,6 +64,22 @@ class App {
       });
       res.send(this.idGenerator.toString());
       this.idGenerator++;
+    });
+
+    // get specific item based on itemId
+    router.get("/app/list/:listId/item/:itemId/", (req, res) => {
+      var listid = req.params.listId;
+      var itemid : number = +req.params.itemId;
+      console.log("listId = ", listid, " itemid = ", itemid);
+      this.SubscriptionList.retrieveItemDetails(res, {listId: listid}, itemid);
+    });
+
+    // update existed item
+    router.put("/app/items/:itemId", (req, res) => {
+      console.log(req.body);
+      var jsonObj = req.body;
+      //update existed record
+      res.send("PUT: /app/items/:itemId");
     });
 
     // router.get("/app/list/:listId/count", (req, res) => {

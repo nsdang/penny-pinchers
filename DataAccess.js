@@ -16,7 +16,8 @@ var DataAccess = /** @class */ (function () {
         this.mongooseInstance = Mongoose.connect(this.DB_CONNECTION_STRING);
         return this.mongooseInstance;
     };
-    DataAccess.DB_CONNECTION_STRING = 'mongodb+srv://pinchers:KXy35VTdZ7ak0v1M@penny-pinchers1.jss5q.mongodb.net/test1?retryWrites=true&w=majority';
+    //static DB_CONNECTION_STRING:string = 'mongodb+srv://pinchers:KXy35VTdZ7ak0v1M@penny-pinchers1.jss5q.mongodb.net/test1?retryWrites=true&w=majority';
+    DataAccess.DB_CONNECTION_STRING = 'mongodb://dbAdmin:test@localhost:3000/pennyPinchers?authSource=admin';
     return DataAccess;
 }());
 exports.DataAccess = DataAccess;

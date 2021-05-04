@@ -31,16 +31,11 @@ var App = /** @class */ (function () {
     };
     // Configure API endpoints.
     App.prototype.routes = function () {
+        var _this = this;
         var router = express.Router();
         /******************************************************
          * ***************Penny-pinchers' Router*******************
          ******************************************************/
-        router.put("/app/items/:itemId", function (req, res) {
-            console.log(req.body);
-            var jsonObj = req.body;
-            //update existed record
-            res.send("PUT: /app/items/:itemId");
-        });
         // get all items
         router.get("/app/list/:listId", function (req, res) {
             //?????????????
@@ -59,6 +54,20 @@ var App = /** @class */ (function () {
             });
             res.send(this.idGenerator.toString());
             this.idGenerator++;
+        });
+        // get specific item based on itemId
+        router.get("/app/list/:listId/item/:itemId/", function (req, res) {
+            var listid = req.params.listId;
+            var itemid = +req.params.itemId;
+            console.log("listId = ", listid, " itemid = ", itemid);
+            _this.SubscriptionList.retrieveItemDetails(res, { listId: listid }, itemid);
+        });
+        // update existed item
+        router.put("/app/items/:itemId", function (req, res) {
+            console.log(req.body);
+            var jsonObj = req.body;
+            //update existed record
+            res.send("PUT: /app/items/:itemId");
         });
         // router.get("/app/list/:listId/count", (req, res) => {
         //   var id = req.params.listId;

@@ -20,8 +20,10 @@ class SubListModel {
                 name: String,
                 description: String,
                 userId: Number,
+                type: String,
                 itemList: [
                     { 
+                        itemId: Number,
                         serviceName: String,
                         addDate: Date,
                         dueDate: Date,
@@ -29,7 +31,7 @@ class SubListModel {
                         isArchived: Boolean,
                     }
                 ]
-            },
+            }, {collection: 'subscriptionList'}
         );
     }
 
@@ -51,6 +53,15 @@ class SubListModel {
         var query = this.model.find({});
         query.exec((err, lists) => {
             response.json(lists);
+        });
+    }
+
+    // retrieve a single item detail
+    public retrieveItemDetails(response:any, filter:Object, itemid:Number):any {
+        var query = this.model.findOne(filter);
+        query.exec((err, list) => {
+            var itemDetail = list.itemList.find(i => i.itemId === itemid);
+            response.json(itemDetail);
         });
     }
 }
