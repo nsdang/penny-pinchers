@@ -20,7 +20,6 @@ class SubListModel {
                 name: String,
                 description: String,
                 userId: Number,
-                type: String,
                 itemList: [
                     { 
                         itemId: Number,
@@ -29,6 +28,7 @@ class SubListModel {
                         dueDate: Date,
                         price: Number,
                         isArchived: Boolean,
+                        type: String,
                     }
                 ]
             }, {collection: 'subscriptionList'}

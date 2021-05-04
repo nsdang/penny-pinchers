@@ -15,7 +15,6 @@ var SubListModel = /** @class */ (function () {
             name: String,
             description: String,
             userId: Number,
-            type: String,
             itemList: [
                 {
                     itemId: Number,
@@ -23,7 +22,8 @@ var SubListModel = /** @class */ (function () {
                     addDate: Date,
                     dueDate: Date,
                     price: Number,
-                    isArchived: Boolean
+                    isArchived: Boolean,
+                    type: String
                 }
             ]
         }, { collection: 'subscriptionList' });
@@ -50,8 +50,6 @@ var SubListModel = /** @class */ (function () {
         var query = this.model.findOne(filter);
         query.exec(function (err, list) {
             var itemDetail = list.itemList.find(function (i) { return i.itemId === itemid; });
-            console.log(list);
-            console.log(list.itemList);
             response.json(itemDetail);
         });
     };
