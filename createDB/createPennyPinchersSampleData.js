@@ -1,4 +1,70 @@
 db = db.getSiblingDB("pennyPinchers");
+
+// Creation of list of Users
+db.createCollection("UserList");
+userCollection = db.getCollection("UserList");
+userCollection.remove({});
+userCollection.insert({
+  userId: 1,
+  username: "MyTran",
+  password: "1234",
+  fname: "My", 
+  lname: "Tran",
+  creditcardInfo : {
+    cardNo: 43242234234324,
+    cvv: 123
+  },
+  isPremium: false, 
+  phoneNo: "1203665356",
+  email: "PP@pmail.com"
+});
+
+userCollection.insert({
+  userId: 2,
+  username: "DanNguyen",
+  password: "nad",
+  fname: "Dan", 
+  lname: "Nguyen",
+  creditcardInfo : {
+    cardNo: 43242234234324,
+    cvv: 123
+  },
+  isPremium: false, 
+  phoneNo: "1203665356",
+  email: "PP@pmail.com"
+});
+
+userCollection.insert({
+  userId: 3,
+  username: "AjerLodhi",
+  password: "MyChoice",
+  fname: "Ajer", 
+  lname: "Lodhi",
+  creditcardInfo : {
+    cardNo: 43242234234324,
+    cvv: 123
+  },
+  isPremium: true,
+  phoneNo: "1203665356", 
+  email: "PP@pmail.com"
+});
+
+userCollection.insert({
+  userId: 4,
+  username: "CaroAngelica",
+  password: "4252ewhw642w4353463ehet",
+  fname: "Caro", 
+  lname: "Angelica",
+  creditcardInfo : {
+    cardNo: 43242234234324,
+    cvv: 123
+  },
+  isPremium: false, 
+  phoneNo: "1203665356",
+  email: "PP@pmail.com"
+});
+
+// Creation of list of Subscriptions
 db.createCollection("subscriptionList");
 listsCollection = db.getCollection("subscriptionList");
 listsCollection.remove({});
