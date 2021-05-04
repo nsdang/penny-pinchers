@@ -37,10 +37,10 @@ listsCollection.insert(
         
 listsCollection.insert(
     {
-    listId : 2,
+    listId : 3,
     name : "Ajer's List",
     description : "In this list, I keep track of all my subscriptions",
-    userId : 2,
+    userId : 3,
     items : [
         {
         serviceName = "Crunchyroll",
@@ -53,16 +53,16 @@ listsCollection.insert(
 
 listsCollection.insert(
     {
-    listId : 2,
+    listId : 3,
     name : "Caro's List",
     description : "In this list, I keep track of all my subscriptions",
-    userId : 2,
+    userId : 3,
     items : [
         {
         serviceName = "Spotify Premium",
         addDate = 5/4/2021,
         dueDate = 6/4/2021,
-        price = 7,
+        price = 11,
         isArchived = false,
     }]
 })
