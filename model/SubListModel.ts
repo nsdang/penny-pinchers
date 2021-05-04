@@ -37,11 +37,20 @@ class SubListModel {
         this.model = mongooseConnection.model<ISubListModel>("SubscriptionList", this.schema);
     }
 
-    // return the list details (name, desc,...)
+    // retrieve a single list filter by userId
     public retrieveAllItems(response:any, filter:Object):any {
-        var query = this.model.findOne(filter); // find the list according to owner/userId?
+        var query = this.model.findOne(filter); 
         query.exec((err, list) => {
             response.json(list);
+        });
+    }
+
+    // retrieve all lists
+    public retrieveAllLists(response:any)
+    {
+        var query = this.model.find({});
+        query.exec((err, lists) => {
+            response.json(lists);
         });
     }
 }
