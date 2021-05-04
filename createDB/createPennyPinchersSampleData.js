@@ -53,10 +53,10 @@ listsCollection.insert(
 
 listsCollection.insert(
     {
-    listId : 3,
+    listId : 4,
     name : "Caro's List",
     description : "In this list, I keep track of all my subscriptions",
-    userId : 3,
+    userId : 4,
     items : [
         {
         serviceName = "Spotify Premium",
