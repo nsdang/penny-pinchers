@@ -38,9 +38,9 @@ var App = /** @class */ (function () {
          ******************************************************/
         // get all items
         router.get("/app/list/:listId", function (req, res) {
-            //?????????????
+            var listid = +req.params.listId;
             console.log("Query all items in the list in db");
-            this.SubscriptionList.retrieveAllItems(res);
+            _this.SubscriptionList.retrieveAllItems(res, { listId: listid });
         });
         // create new item
         router.post("/app/list/", function (req, res) {

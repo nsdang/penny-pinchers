@@ -46,10 +46,10 @@ class App {
      ******************************************************/
 
     // get all items
-    router.get("/app/list/:listId", function (req, res) {
-      //?????????????
+    router.get("/app/list/:listId", (req, res) => {
+      var listid : number = +req.params.listId;
       console.log("Query all items in the list in db");
-      this.SubscriptionList.retrieveAllItems(res);
+      this.SubscriptionList.retrieveAllItems(res, {listId:listid});
     });
 
     // create new item
