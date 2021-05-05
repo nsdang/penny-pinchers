@@ -45,14 +45,6 @@ var SubListModel = /** @class */ (function () {
             response.json(lists);
         });
     };
-    // retrieve a single item detail
-    SubListModel.prototype.retrieveItemDetails = function (response, filter, itemid) {
-        var query = this.model.findOne(filter);
-        query.exec(function (err, list) {
-            var itemDetail = list.itemList.find(function (i) { return i.itemId === itemid; });
-            response.json(itemDetail);
-        });
-    };
     return SubListModel;
 }());
 exports.SubListModel = SubListModel;

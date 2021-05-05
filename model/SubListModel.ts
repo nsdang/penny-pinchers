@@ -55,14 +55,5 @@ class SubListModel {
             response.json(lists);
         });
     }
-
-    // retrieve a single item detail
-    public retrieveItemDetails(response:any, filter:Object, itemid:Number):any {
-        var query = this.model.findOne(filter);
-        query.exec((err, list) => {
-            var itemDetail = list.itemList.find(i => i.itemId === itemid);
-            response.json(itemDetail);
-        });
-    }
 }
 export {SubListModel};

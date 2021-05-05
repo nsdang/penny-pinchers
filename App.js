@@ -9,9 +9,6 @@ var logger = require("morgan");
 var bodyParser = require("body-parser");
 //var MongoClient = require('mongodb').MongoClient;
 //var Q = require('q');
-//import {ListModel} from './model/ListModel';
-//import {TaskModel} from './model/TaskModel';
-//import {DataAccess} from './DataAccess';
 var SubListModel_1 = require("./model/SubListModel");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
@@ -33,9 +30,6 @@ var App = /** @class */ (function () {
     App.prototype.routes = function () {
         var _this = this;
         var router = express.Router();
-        /******************************************************
-         * ***************Penny-pinchers' Router*******************
-         ******************************************************/
         // get all items
         router.get("/app/list/:listId", function (req, res) {
             var listid = +req.params.listId;
@@ -60,7 +54,7 @@ var App = /** @class */ (function () {
             var listid = +req.params.listId;
             var itemid = +req.params.itemId;
             console.log("listId = ", listid, " itemid = ", itemid);
-            _this.SubscriptionList.retrieveItemDetails(res, { listId: listid }, itemid);
+            //this.SubscriptionList.retrieveItemDetails(res, {listId: listid}, itemid);
         });
         // update existed item
         router.put("/app/items/:itemId", function (req, res) {
@@ -69,37 +63,6 @@ var App = /** @class */ (function () {
             //update existed record
             res.send("PUT: /app/items/:itemId");
         });
-        // router.get("/app/list/:listId/count", (req, res) => {
-        //   var id = req.params.listId;
-        //   console.log("Query single list with id: " + id);
-        //   // this.Tasks.retrieveTasksCount(res, {listId: id});
-        // });
-        // router.post("/app/list/", (req, res) => {
-        //   console.log(req.body);
-        //   var jsonObj = req.body;
-        //   //jsonObj.listId = this.idGenerator;
-        //   /* this.Lists.model.create([jsonObj], (err) => {
-        //         if (err) {
-        //             console.log('object creation failed');
-        //         }
-        //     });
-        //     */
-        //   res.send(this.idGenerator.toString());
-        //   this.idGenerator++;
-        // });
-        // router.get("/app/list/:listId", (req, res) => {
-        //   var id = req.params.listId;
-        //   console.log("Query single list with id: " + id);
-        //   //this.Tasks.retrieveTasksDetails(res, {listId: id});
-        // });
-        // router.get("/app/list/", (req, res) => {
-        //   console.log("Query All list");
-        //   //this.Lists.retrieveAllLists(res);
-        // });
-        // router.get("/app/listcount", (req, res) => {
-        //   console.log("Query the number of list elements in db");
-        //   // this.Lists.retrieveListCount(res);
-        // });
         this.expressApp.use("/", router);
         this.expressApp.use("/app/json/", express.static(__dirname + "/app/json"));
         this.expressApp.use("/images", express.static(__dirname + "/img"));

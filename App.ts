@@ -62,7 +62,7 @@ class App {
       var listid : number = +req.params.listId;
       var itemid : number = +req.params.itemId;
       console.log("listId = ", listid, " itemid = ", itemid);
-      this.SubscriptionList.retrieveItemDetails(res, {listId: listid}, itemid);
+      //this.SubscriptionList.retrieveItemDetails(res, {listId: listid}, itemid);
     });
 
     // update existed item
