@@ -38,20 +38,15 @@ var App = /** @class */ (function () {
             console.log("Query all items in the list in db");
             _this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
         });
-        // create new item
-        // router.post("/app/list/", function (req, res) {
-        //   console.log(req.body);
-        //   var jsonObj = req.body;
-        //   //jsonObj.listId = this.idGenerator;
-        //   this.SubscriptionList.model.create([jsonObj], function (err) {
-        //     if (err) {
-        //       console.log("object creation failed");
-        //     }
-        //   });
-        //   res.send(this.idGenerator.toString());
-        //   this.idGenerator++;
-        // });
-        router.post('/app/list/', function (req, res) {
+        // get specific item based on itemId
+        router.get("/app/list/:listId/item/:itemId/", function (req, res) {
+            var listid = +req.params.listId;
+            var itemid = +req.params.itemId;
+            console.log("listId = ", listid, " itemid = ", itemid);
+            _this.SubscriptionItem.retrieveItemDetails(res, { listId: listid, itemId: itemid });
+        });
+        // post an item
+        router.post('/app/item/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
             //jsonObj.listId = this.idGenerator;
@@ -63,20 +58,15 @@ var App = /** @class */ (function () {
             res.send(_this.idGenerator.toString());
             _this.idGenerator++;
         });
-        // get specific item based on itemId
-        router.get("/app/list/:listId/item/:itemId/", function (req, res) {
-            var listid = +req.params.listId;
-            var itemid = +req.params.itemId;
-            console.log("listId = ", listid, " itemid = ", itemid);
-            _this.SubscriptionItem.retrieveItemDetails(res, { listId: listid, itemId: itemid });
-        });
-        // update existed item
-        router.put("/app/items/:itemId", function (req, res) {
-            console.log(req.body);
-            var jsonObj = req.body;
-            //update existed record
-            res.send("PUT: /app/items/:itemId");
-        });
+        /*
+            // update existed item
+            router.put("/app/items/:itemId", (req, res) => {
+              console.log(req.body);
+              var jsonObj = req.body;
+              //update existed record
+              res.send("PUT: /app/items/:itemId");
+            });
+        */
         this.expressApp.use("/", router);
         this.expressApp.use("/app/json/", express.static(__dirname + "/app/json"));
         this.expressApp.use("/images", express.static(__dirname + "/img"));

@@ -96,7 +96,7 @@ listsCollection.insert({
   userId: 4,
 });
 
-    
+// Creation of SubscriptionItems
 db.createCollection('subscriptionItems')
 itemcollections = db.getCollection("subscriptionItems")
 itemcollections.remove({})

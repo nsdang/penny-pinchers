@@ -46,7 +46,15 @@ class App {
       this.SubscriptionItem.retrieveAllItems(res, {listId:listid});
     });
 
+    // get specific item based on itemId
+    router.get("/app/list/:listId/item/:itemId/", (req, res) => {
+      var listid : number = +req.params.listId;
+      var itemid : number = +req.params.itemId;
+      console.log("listId = ", listid, " itemid = ", itemid);
+      this.SubscriptionItem.retrieveItemDetails(res, {listId: listid, itemId: itemid});
+    });
 
+    // post an item
     router.post('/app/item/', (req, res) => {
       console.log(req.body);
       var jsonObj = req.body;
@@ -60,14 +68,8 @@ class App {
       this.idGenerator++;
   });
 
-    // get specific item based on itemId
-    router.get("/app/list/:listId/item/:itemId/", (req, res) => {
-      var listid : number = +req.params.listId;
-      var itemid : number = +req.params.itemId;
-      console.log("listId = ", listid, " itemid = ", itemid);
-      this.SubscriptionItem.retrieveItemDetails(res, {listId: listid, itemId: itemid});
-    });
-
+    
+/*
     // update existed item
     router.put("/app/items/:itemId", (req, res) => {
       console.log(req.body);
@@ -75,7 +77,7 @@ class App {
       //update existed record
       res.send("PUT: /app/items/:itemId");
     });
-
+*/
     
 
     this.expressApp.use("/", router);
