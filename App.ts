@@ -46,20 +46,8 @@ class App {
       this.SubscriptionItem.retrieveAllItems(res, {listId:listid});
     });
 
-    // create new item
-    // router.post("/app/list/", function (req, res) {
-    //   console.log(req.body);
-    //   var jsonObj = req.body;
-    //   //jsonObj.listId = this.idGenerator;
-    //   this.SubscriptionList.model.create([jsonObj], function (err) {
-    //     if (err) {
-    //       console.log("object creation failed");
-    //     }
-    //   });
-    //   res.send(this.idGenerator.toString());
-    //   this.idGenerator++;
-    // });
-    router.post('/app/list/', (req, res) => {
+
+    router.post('/app/item/', (req, res) => {
       console.log(req.body);
       var jsonObj = req.body;
       //jsonObj.listId = this.idGenerator;

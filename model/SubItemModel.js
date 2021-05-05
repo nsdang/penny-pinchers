@@ -23,18 +23,17 @@ var SubItemModel = /** @class */ (function () {
     SubItemModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("SubscriptionItems", this.schema);
     };
-    // we call this and passing in the listId to get all the items
+    // Get all items based on listid
     SubItemModel.prototype.retrieveAllItems = function (response, filter) {
-        var query = this.model.find(filter); // return one list with listId
+        var query = this.model.find(filter);
         query.exec(function (err, items) {
             response.json(items);
         });
     };
-    // retrieve a single item detail
+    // Retrieve a single item detail
     SubItemModel.prototype.retrieveItemDetails = function (response, filter) {
         var query = this.model.findOne(filter);
         query.exec(function (err, item) {
-            //   var itemDetail = list.itemList.find((i) => i.itemId === itemid);
             response.json(item);
         });
     };
