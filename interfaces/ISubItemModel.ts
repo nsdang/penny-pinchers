@@ -1,13 +1,12 @@
 import Mongoose = require("mongoose");
 
 interface ISubItemModel extends Mongoose.Document {
-    listId: number;
-    itemList: [{
-            serviceName: string,
-            addDate: Date,
-            dueDate: Date,
-            price: number,
-            isArchived: boolean,
-    }]; 
+    listId: Number,
+    itemId: Number,
+    serviceName: String,
+    addDate: Date,
+    dueDate: Date,
+    price: Number,
+    isArchived: Boolean
 }
 export{ISubItemModel};

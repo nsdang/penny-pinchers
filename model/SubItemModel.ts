@@ -24,16 +24,6 @@ class SubItemModel {
         dueDate: Date,
         price: Number,
         isArchived: Boolean,
-        // itemList: [
-        //   {
-        //     itemId: Number,
-        //     serviceName: String,
-        //     addDate: Date,
-        //     dueDate: Date,
-        //     price: Number,
-        //     isArchived: Boolean,
-        //   },
-        // ],
       },
       { collection: "subscriptionItems" }
     );
@@ -46,22 +36,20 @@ class SubItemModel {
     );
   }
 
-  // we call this and passing in the listId to get all the items
+  // Get all items based on listid
   public retrieveAllItems(response: any, filter: Object): any {
-    var query = this.model.find(filter); // return one list with listId
+    var query = this.model.find(filter); 
     query.exec((err, items) => {
       response.json(items);
     });
   }
 
-  // retrieve a single item detail
+  // Retrieve a single item detail
   public retrieveItemDetails(response: any, filter: Object): any {
     var query = this.model.findOne(filter);
     query.exec((err, item) => {
-    //   var itemDetail = list.itemList.find((i) => i.itemId === itemid);
       response.json(item);
     });
   }
 }
-
 export { SubItemModel };
