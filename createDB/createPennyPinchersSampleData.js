@@ -73,34 +73,13 @@ listsCollection.insert({
   name: "My's List",
   description: "In this list, I keep track of all my subscriptions",
   userId: 1,
-  itemList: [
-    {
-      itemId: 1,
-      serviceName: "Amazon Prime",
-      addDate: 5 / 2 / 2021,
-      dueDate: 6 / 2 / 2021,
-      price: 12,
-      isArchived: false,
-      type: "Monthly",
-    },
-  ],
 });
+
 listsCollection.insert({
   listId: 2,
   name: "Dan's List",
   description: "In this list, I keep track of all my subscriptions",
   userId: 2,
-  itemList: [
-    {
-      itemId: 1,
-      serviceName: "Netflix",
-      addDate: 5 / 4 / 2021,
-      dueDate: 6 / 4 / 2021,
-      price: 10,
-      isArchived: false,
-      type: "Monthly",
-    },
-  ],
 });
 
 listsCollection.insert({
@@ -108,17 +87,6 @@ listsCollection.insert({
   name: "Ajer's List",
   description: "In this list, I keep track of all my subscriptions",
   userId: 3,
-  itemList: [
-    {
-      itemId: 1,
-      serviceName: "Crunchyroll",
-      addDate: 5 / 4 / 2021,
-      dueDate: 6 / 4 / 2021,
-      price: 7,
-      isArchived: false,
-      type: "Monthly",
-    },
-  ],
 });
 
 listsCollection.insert({
@@ -126,15 +94,47 @@ listsCollection.insert({
   name: "Caro's List",
   description: "In this list, I keep track of all my subscriptions",
   userId: 4,
-  itemList: [
-    {
-      itemId: 1,
-      serviceName: "Spotify Premium",
-      addDate: 5 / 4 / 2021,
-      dueDate: 6 / 4 / 2021,
-      price: 11,
-      isArchived: false,
-      type: "Monthly",
-    },
-  ],
 });
+
+    
+db.createCollection('items')
+itemcollections = db.getCollection("items")
+itemcollections.remove({})
+itemcollections.insert({
+    listId : 1,
+    serviceName : "Amazon Prime",
+    addDate : 5/2/2021,
+    dueDate : 6/2/2021,
+    price : 12,
+    isArchived : false,
+})
+
+itemcollections.insert({
+        listId : 2,
+        serviceName : "Netflix",
+        addDate : 5/4/2021,
+        dueDate : 6/4/2021,
+        price : 10,
+        isArchived : false,
+})
+            
+itemcollections.insert(
+{
+    listId : 3,
+    serviceName : "Crunchyroll",
+    addDate : 5/4/2021,
+    dueDate : 6/4/2021,
+    price : 7,
+    isArchived : false,
+})
+    
+    itemcollections.insert(
+    {
+        listId : 4,
+        serviceName : "Spotify Premium",
+        addDate : 5/4/2021,
+        dueDate : 6/4/2021,
+        price : 11,
+        isArchived : false,
+    })
+
