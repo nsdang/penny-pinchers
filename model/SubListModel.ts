@@ -20,31 +20,12 @@ class SubListModel {
                 name: String,
                 description: String,
                 userId: Number,
-                itemList: [
-                    { 
-                        itemId: Number,
-                        serviceName: String,
-                        addDate: Date,
-                        dueDate: Date,
-                        price: Number,
-                        isArchived: Boolean,
-                    },
-                ]
             }, {collection: 'subscriptionList'}
         );
     }
 
     public createModel():void{
         this.model = mongooseConnection.model<ISubListModel>("SubscriptionList", this.schema);
-    }
-
-    // retrieve a single list filter by userId
-    public retrieveAllItems(response:any, filter:Object):any {
-        var query = this.model.findOne(filter); 
-        query.exec((err, list) => {
-            console.log(list);
-            response.json(list);
-        });
     }
 
     // retrieve all lists

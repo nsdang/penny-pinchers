@@ -8,12 +8,14 @@ import * as bodyParser from "body-parser";
 //var Q = require('q');
 
 import { SubListModel } from "./model/SubListModel";
+import { SubItemModel } from "./model/SubItemModel";
 
 // Creates and configures an ExpressJS web server.
 class App {
   // ref to Express instance
   public expressApp: express.Application;
   public SubscriptionList: SubListModel;
+  public SubscriptionItem: SubItemModel;
   public idGenerator: number;
 
   //Run configuration methods on the Express instance.
@@ -23,6 +25,7 @@ class App {
     this.routes();
     this.idGenerator = 102;
     this.SubscriptionList = new SubListModel();
+    this.SubscriptionItem = new SubItemModel();
   }
 
   // Configure Express middleware.
@@ -40,7 +43,7 @@ class App {
     router.get("/app/list/:listId", (req, res) => {
       var listid : number = +req.params.listId;
       console.log("Query all items in the list in db");
-      this.SubscriptionList.retrieveAllItems(res, {listId:listid});
+      this.SubscriptionItem.retrieveAllItems(res, {listId:listid});
     });
 
     // create new item
@@ -62,7 +65,7 @@ class App {
       var listid : number = +req.params.listId;
       var itemid : number = +req.params.itemId;
       console.log("listId = ", listid, " itemid = ", itemid);
-      //this.SubscriptionList.retrieveItemDetails(res, {listId: listid}, itemid);
+      this.SubscriptionItem.retrieveItemDetails(res, {listId: listid, itemId: itemid});
     });
 
     // update existed item

@@ -10,6 +10,7 @@ var bodyParser = require("body-parser");
 //var MongoClient = require('mongodb').MongoClient;
 //var Q = require('q');
 var SubListModel_1 = require("./model/SubListModel");
+var SubItemModel_1 = require("./model/SubItemModel");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
@@ -19,6 +20,7 @@ var App = /** @class */ (function () {
         this.routes();
         this.idGenerator = 102;
         this.SubscriptionList = new SubListModel_1.SubListModel();
+        this.SubscriptionItem = new SubItemModel_1.SubItemModel();
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
@@ -34,7 +36,7 @@ var App = /** @class */ (function () {
         router.get("/app/list/:listId", function (req, res) {
             var listid = +req.params.listId;
             console.log("Query all items in the list in db");
-            _this.SubscriptionList.retrieveAllItems(res, { listId: listid });
+            _this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
         });
         // create new item
         router.post("/app/list/", function (req, res) {
@@ -54,7 +56,7 @@ var App = /** @class */ (function () {
             var listid = +req.params.listId;
             var itemid = +req.params.itemId;
             console.log("listId = ", listid, " itemid = ", itemid);
-            //this.SubscriptionList.retrieveItemDetails(res, {listId: listid}, itemid);
+            _this.SubscriptionItem.retrieveItemDetails(res, { listId: listid, itemId: itemid });
         });
         // update existed item
         router.put("/app/items/:itemId", function (req, res) {

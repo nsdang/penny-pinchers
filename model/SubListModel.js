@@ -14,29 +14,11 @@ var SubListModel = /** @class */ (function () {
             listId: Number,
             name: String,
             description: String,
-            userId: Number,
-            itemList: [
-                {
-                    itemId: Number,
-                    serviceName: String,
-                    addDate: Date,
-                    dueDate: Date,
-                    price: Number,
-                    isArchived: Boolean
-                },
-            ]
+            userId: Number
         }, { collection: 'subscriptionList' });
     };
     SubListModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("SubscriptionList", this.schema);
-    };
-    // retrieve a single list filter by userId
-    SubListModel.prototype.retrieveAllItems = function (response, filter) {
-        var query = this.model.findOne(filter);
-        query.exec(function (err, list) {
-            console.log(list);
-            response.json(list);
-        });
     };
     // retrieve all lists
     SubListModel.prototype.retrieveAllLists = function (response) {

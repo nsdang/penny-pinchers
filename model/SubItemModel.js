@@ -12,34 +12,30 @@ var SubItemModel = /** @class */ (function () {
     SubItemModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
             listId: Number,
-            itemList: [
-                {
-                    itemId: Number,
-                    serviceName: String,
-                    addDate: Date,
-                    dueDate: Date,
-                    price: Number,
-                    isArchived: Boolean
-                }
-            ]
-        }, { collection: 'subscriptionItems' });
+            itemId: Number,
+            serviceName: String,
+            addDate: Date,
+            dueDate: Date,
+            price: Number,
+            isArchived: Boolean
+        }, { collection: "subscriptionItems" });
     };
     SubItemModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("SubscriptionItems", this.schema);
     };
     // we call this and passing in the listId to get all the items
     SubItemModel.prototype.retrieveAllItems = function (response, filter) {
-        var query = this.model.findOne(filter); // return one list with listId
+        var query = this.model.find(filter); // return one list with listId
         query.exec(function (err, items) {
             response.json(items);
         });
     };
     // retrieve a single item detail
-    SubItemModel.prototype.retrieveItemDetails = function (response, filter, itemid) {
+    SubItemModel.prototype.retrieveItemDetails = function (response, filter) {
         var query = this.model.findOne(filter);
-        query.exec(function (err, list) {
-            var itemDetail = list.itemList.find(function (i) { return i.itemId === itemid; });
-            response.json(itemDetail);
+        query.exec(function (err, item) {
+            //   var itemDetail = list.itemList.find((i) => i.itemId === itemid);
+            response.json(item);
         });
     };
     return SubItemModel;
