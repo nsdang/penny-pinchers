@@ -22,9 +22,8 @@ var SubListModel = /** @class */ (function () {
                     addDate: Date,
                     dueDate: Date,
                     price: Number,
-                    isArchived: Boolean,
-                    type: String
-                }
+                    isArchived: Boolean
+                },
             ]
         }, { collection: 'subscriptionList' });
     };
@@ -35,6 +34,7 @@ var SubListModel = /** @class */ (function () {
     SubListModel.prototype.retrieveAllItems = function (response, filter) {
         var query = this.model.findOne(filter);
         query.exec(function (err, list) {
+            console.log(list);
             response.json(list);
         });
     };

@@ -57,7 +57,7 @@ var App = /** @class */ (function () {
         });
         // get specific item based on itemId
         router.get("/app/list/:listId/item/:itemId/", function (req, res) {
-            var listid = req.params.listId;
+            var listid = +req.params.listId;
             var itemid = +req.params.itemId;
             console.log("listId = ", listid, " itemid = ", itemid);
             _this.SubscriptionList.retrieveItemDetails(res, { listId: listid }, itemid);

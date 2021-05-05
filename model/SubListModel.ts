@@ -28,8 +28,7 @@ class SubListModel {
                         dueDate: Date,
                         price: Number,
                         isArchived: Boolean,
-                        type: String,
-                    }
+                    },
                 ]
             }, {collection: 'subscriptionList'}
         );
@@ -43,6 +42,7 @@ class SubListModel {
     public retrieveAllItems(response:any, filter:Object):any {
         var query = this.model.findOne(filter); 
         query.exec((err, list) => {
+            console.log(list);
             response.json(list);
         });
     }

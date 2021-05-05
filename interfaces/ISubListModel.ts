@@ -5,12 +5,14 @@ interface ISubListModel extends Mongoose.Document {
     name: string;
     description: string;
     userId: number;
-    items: [{
+    itemList: [{
+        itemId: number,
         serviceName: string,
         addDate: Date,
         dueDate: Date,
         price: number,
         isArchived: boolean,
+        type: string,
     }]; 
 }
 
