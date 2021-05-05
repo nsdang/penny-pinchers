@@ -1,233 +1,187 @@
+<link href="styles.css" rel="stylesheet">
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
 
-<!-- Set the page to the width of the device and set the zoon level -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap Tutorial</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8">
+    <!-- Set the page to the width of the device and set the zoon level -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Penny Pinchers Project</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  </head>
 
-<style>
-#ref {
-  -webkit-box-reflect: below -16px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.2));
-}
-#shade{
-border: 3px solid;
-  padding: 10px;
-  box-shadow: 2px 0px;
-}
+  <body id="grad1">
 
-#grad1 {
-  height: 1500px;
-background: #e52d27;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #b31217, #e52d27);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #b31217, #e52d27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */}
-#grad2 {
-background: #1488CC;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #2B32B2, #1488CC);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #2B32B2, #1488CC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-#grad3
-{
-background: #e1eec3;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #f05053, #e1eec3);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #f05053, #e1eec3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
+    <!---Shows user that is logged in and "About" option to navigate to About page-->
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#458CFF;" id="grad2">
+      <a class="navbar-brand" href="#"><p class="p1" style="color: red; text-shadow: 2px 2px 4px #000000;">Logged in as AJ</p></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#" style="color: white; text-shadow: 2px 2px 4px #000000; font-size:20px;"><p>About </p><span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-.p1 {
-  font-family: Impact, Haettenschweiler, "Franklin Gothic Bold";
-  font-size: 30px;
-  text-align: center;
-}
-.p2 {
-  font-family: Impact, Haettenschweiler, "Franklin Gothic Bold";
-}
+    <!--Navigation for 
+      - creating subscription items,
+      -  viewing profile,
+      -  and vieing subscription list.-->
+    <nav class="navbar navbar-expand-lg navbar-light" style="font-size: larger;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" bg-812F1D>
+        <ul id="grad2"class="nav flex-column" style="background-color:#458CFF;">
 
-input.big-checkbox {width: 100px; height: 40px;}
-.container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 50px 60px;
-  font-size: 30px;
-}
-.jumbotron{
-    background-color:#FF8469;
-    color:black;
-}
-/* Adds borders for tabs */
-.tab-content {
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
-}
-.nav-tabs {
-    margin-bottom: 0;
-}
-</style>
+          <!--            Add subscription item             -->
+          
+          <li class="button" id="shade"class="nav-item active" align="center">
+            <a id="ref2"class="nav-link" href="#"><input type="image" class="button" src="img/plus.png" alt="Add" width="48" height="48"></a>
+          </li>
 
-</head>
-<body id="grad1">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#458CFF;" id="grad2">
-  <a class="navbar-brand" href="#"><p class="p1" style="color: red; text-shadow: 2px 2px 4px #000000;">Logged in as AJ</p></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#" style="color: white; text-shadow: 2px 2px 4px #000000; font-size:20px;"><p>About </p><span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-  </div>
-</nav>
+          <!--              View Profile              -->
+          <li class="button" id="shade" class="nav-item" align="center">
+            <a id="ref2"class="nav-link" href="#"><input type="image" src="img/profile.png" alt="Profile" width="48" height="48"></a>
+          </li>
+          
+          <!--         View subscription list         -->
+          <li class="button" id="shade" class="nav-item" align="center">
+            <a id="ref2" class="nav-link" href="#"><input type="image" src="img/list.png" alt="View" width="48" height="48"></a>
+          </li>
+        </ul>
 
-<nav class="navbar navbar-expand-lg navbar-light" style="font-size: larger;">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+      </div>
+    </nav>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" bg-812F1D>
-    <ul id="grad2"class="nav flex-column" style="background-color:#458CFF;">
-      <li id="shade"class="nav-item active" align="center">
-        <a id="ref2"class="nav-link" href="#"><input type="image" src="../img/plus.png" alt="Add" width="48" height="48"> <span class="sr-only"/>(current)</span></a>
-      </li>
-      <li id="shade" class="nav-item" align="center">
-        <a id="ref2"class="nav-link" href="#"><input type="image" src="../img/profile.png" alt="Profile" width="48" height="48"></a>
-      </li>
-      <li id="shade" class="nav-item" align="center">
-        <a id="ref2" class="nav-link" href="#"><input type="image" src="../img/list.png" alt="View" width="48" height="48"></a>
-      </li>
-    </ul>
+    <!-- <div class="page-header">
+    <h1>Subscriber Item List PAGE<h1>
+    </div> -->
 
+    <!-- CONTAINERS -->
+    <!-- container puts padding around itself while container-fluid fills the whole screen. Bootstap grids require a container. -->
+    <div class="container" id="ref"> 
 
-<!-- <a class="navbar-brand" href="#">Subscriber Item List PAGE</a> -->
+      <div class = "jumbotron" id="grad3">
 
-  </div>
-</nav>
-
-
-<!-- <div class="page-header">
-<h1>Subscriber Item List PAGE<h1>
-</div> -->
-
-<!-- CONTAINERS -->
-<!-- container puts padding around itself while container-fluid fills the whole screen. Bootstap grids require a container. -->
-<div class="container" id="ref"> 
-
-	<div class = "jumbotron" id="grad3">
-
-		<div class="row align-items-center">
-
-      <span class="border border-dark">
-        <div class="col-9 col-sm-5 col-lg-9" style="width: 200px;">
-          <p>Netflix
+        <!--         Row #1              -->
+        <div class="row align-items-center">
+          <!--Column #1-->
+          <span class="border border-dark">
+            <div class="col-9 col-sm-5 col-lg-9" style="width: 200px;">
+              <p>Netflix
+            </div>
+          </span>
+          <!--Column #2-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>11/05/2021
+          </div>
+          <!--Column #3-->
+          <div class="col col-lg-2" style="width: 200px;">
+          <p>Monthly
+          </div>
+          <!--Column #4-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>$20.32
+          </div>
+          <!--Column #5-->
+          <div class = "col col-lg-2" style="width: 200px;">
+            <input class="big-checkbox" type="checkbox" value="" id="flexCheckDefault">
+          </div>
         </div>
-      </span>
 
-    <div class="col col-lg-2" style="width: 200px;">
-      <p>11/05/2021
+        <!--         Row #2              -->
+        <div class="row align-items-center">
+          <!--Column #1-->
+          <span class="border border-dark">
+            <div class="col-9 col-sm-5 col-lg-9" style="width: 200px;">
+              <p>Amazon
+            </div>
+          </span>
+          <!--Column #2-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p >12/05/2021
+          </div>
+          <!--Column #3-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>Monthly
+          </div>
+          <!--Column #4-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>$15.32
+          </div>
+          <!--Column #5-->
+          <div class = "col col-lg-2" style="width: 200px;">
+            <input class="big-checkbox" type="checkbox" value="" id="flexCheckDefault">
+          </div>
+        </div>
+
+        <!--         Row #3              -->
+        <div class="row align-items-center">
+          <!--Column #1-->
+          <span class="border border-dark">
+            <div class="col-9 col-sm-5 col-lg-9" style="width: 200px;">
+              <p>Crunchyroll
+            </div>
+          </span>
+          <!--Column #2-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>12/12/2021
+          </div>
+          <!--Column #3-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>Monthly
+          </div>
+          <!--Column #4-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>$12.99
+          </div>
+          <!--Column #5-->
+          <div class = "col col-lg-2" style="width: 200px;">
+            <input class="big-checkbox" type="checkbox" value="" id="flexCheckDefault">
+          </div>
+        </div>
+        
+        <!--         Row #4              -->
+        <div class="row align-items-center">
+          <!--Column #1-->
+          <span class="border border-dark">
+            <div class="col-9 col-sm-5 col-lg-9" style="width: 200px;">
+              <p font-size="50px">HBO max
+            </div>
+          </span>
+          <!--Column #2-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>12/23/2021
+          </div>
+          <!--Column #3-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>Monthly
+          </div>
+          <!--Column #4-->
+          <div class="col col-lg-2" style="width: 200px;">
+            <p>$25.25
+          </div>
+          <!--Column #5-->
+          <div class = "col col-lg-2" style="width: 200px;">
+            <input class="big-checkbox" type="checkbox" value="" id="flexCheckDefault">
+          </div>
+        </div>
+      
+        <!-- Row #5 - Delete button -->
+        <div class="row align-items-center" align="center" style="padding:20px;">
+          <div class="col col-lg-2" style="width: 200px;" align ="center">	
+            <a id="grad2"class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#458CFF;">Delete Item(s)</a>
+        </div>
+      </div>
     </div>
 
-    <div class="col col-lg-2" style="width: 200px;">
-    <p>Monthly
-    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-    <div class="col col-lg-2" style="width: 200px;">
-    <p>$20.32
-    </div>
-
-    <div class = "col col-lg-2" style="width: 200px;">
-      <input class="big-checkbox" type="checkbox" value="" id="flexCheckDefault">
-    </div>
-  </div>
-	
-<div class="row align-items-center">
-
-<span class="border border-dark">
-<div class="col-9 col-sm-5 col-lg-9" style="width: 200px;">
-<p>Amazon
-</div>
-</span>
-
-<div class="col col-lg-2" style="width: 200px;">
-<p>12/05/2021
-</div>
-
-<div class="col col-lg-2" style="width: 200px;">
-<p>Monthly
-</div>
-
-<div class="col col-lg-2" style="width: 200px;">
-<p>$15.32
-</div>
-
-<div class = "col col-lg-2" style="width: 200px;">
-  <input class="big-checkbox" type="checkbox" value="" id="flexCheckDefault">
-</div>
-
-		</div>
-	<div class="row align-items-center">
-
-<span class="border border-dark">
-<div class="col-9 col-sm-5 col-lg-9" style="width: 200px;">
-<p>Crunchyroll
-</div>
-</span>
-
-<div class="col col-lg-2" style="width: 200px;">
-<p>12/12/2021
-</div>
-
-<div class="col col-lg-2" style="width: 200px;">
-<p>Monthly
-</div>
-
-<div class="col col-lg-2" style="width: 200px;">
-<p>$12.99
-</div>
-
-<div class = "col col-lg-2" style="width: 200px;">
-  <input class="big-checkbox" type="checkbox" value="" id="flexCheckDefault">
-</div>
-
-		</div>
-	<div class="row align-items-center">
-
-<span class="border border-dark">
-<div class="col-9 col-sm-5 col-lg-9" style="width: 200px;">
-<p font-size="50px">HBO max
-</div>
-</span>
-
-<div class="col col-lg-2" style="width: 200px;">
-<p>12/23/2021
-</div>
-
-<div class="col col-lg-2" style="width: 200px;">
-<p>Monthly
-</div>
-
-<div class="col col-lg-2" style="width: 200px;">
-<p>$25.25
-</div>
-
-<div class = "col col-lg-2" style="width: 200px;">
-  <input class="big-checkbox" type="checkbox" value="" id="flexCheckDefault">
-</div>
-
-</div>
-	
-	
-<div class="row align-items-center" align="center" style="padding:20px;">
-	<div class="col col-lg-2" style="width: 200px;" align ="center">	
-	<a id="grad2"class="btn btn-primary btn-lg" href="#" role="button" style="background-color:#458CFF;">
-Delete Item(s)</a>
-</div>
-</div>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-</body>
+  </body>
 </html>
