@@ -97,11 +97,12 @@ listsCollection.insert({
 });
 
     
-db.createCollection('items')
+db.createCollection('subscriptionItems')
 itemcollections = db.getCollection("items")
 itemcollections.remove({})
 itemcollections.insert({
     listId : 1,
+    itemId : 1, 
     serviceName : "Amazon Prime",
     addDate : 5/2/2021,
     dueDate : 6/2/2021,
@@ -110,7 +111,18 @@ itemcollections.insert({
 })
 
 itemcollections.insert({
+    listId : 1,
+    itemId : 2, 
+    serviceName : "HBO premium",
+    addDate : 5/4/2021,
+    dueDate : 6/4/2021,
+    price : 15,
+    isArchived : false,
+})
+
+itemcollections.insert({
         listId : 2,
+        itemId : 1, 
         serviceName : "Netflix",
         addDate : 5/4/2021,
         dueDate : 6/4/2021,
@@ -121,6 +133,7 @@ itemcollections.insert({
 itemcollections.insert(
 {
     listId : 3,
+    itemId : 1, 
     serviceName : "Crunchyroll",
     addDate : 5/4/2021,
     dueDate : 6/4/2021,
@@ -131,6 +144,7 @@ itemcollections.insert(
     itemcollections.insert(
     {
         listId : 4,
+        itemId : 1, 
         serviceName : "Spotify Premium",
         addDate : 5/4/2021,
         dueDate : 6/4/2021,
