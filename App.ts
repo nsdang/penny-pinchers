@@ -47,18 +47,30 @@ class App {
     });
 
     // create new item
-    router.post("/app/list/", function (req, res) {
+    // router.post("/app/list/", function (req, res) {
+    //   console.log(req.body);
+    //   var jsonObj = req.body;
+    //   //jsonObj.listId = this.idGenerator;
+    //   this.SubscriptionList.model.create([jsonObj], function (err) {
+    //     if (err) {
+    //       console.log("object creation failed");
+    //     }
+    //   });
+    //   res.send(this.idGenerator.toString());
+    //   this.idGenerator++;
+    // });
+    router.post('/app/list/', (req, res) => {
       console.log(req.body);
       var jsonObj = req.body;
       //jsonObj.listId = this.idGenerator;
-      this.SubscriptionList.model.create([jsonObj], function (err) {
-        if (err) {
-          console.log("object creation failed");
-        }
+      this.SubscriptionItem.model.create([jsonObj], (err) => {
+          if (err) {
+              console.log('object creation failed');
+          }
       });
       res.send(this.idGenerator.toString());
       this.idGenerator++;
-    });
+  });
 
     // get specific item based on itemId
     router.get("/app/list/:listId/item/:itemId/", (req, res) => {

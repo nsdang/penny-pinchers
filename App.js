@@ -39,17 +39,29 @@ var App = /** @class */ (function () {
             _this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
         });
         // create new item
-        router.post("/app/list/", function (req, res) {
+        // router.post("/app/list/", function (req, res) {
+        //   console.log(req.body);
+        //   var jsonObj = req.body;
+        //   //jsonObj.listId = this.idGenerator;
+        //   this.SubscriptionList.model.create([jsonObj], function (err) {
+        //     if (err) {
+        //       console.log("object creation failed");
+        //     }
+        //   });
+        //   res.send(this.idGenerator.toString());
+        //   this.idGenerator++;
+        // });
+        router.post('/app/list/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
             //jsonObj.listId = this.idGenerator;
-            this.SubscriptionList.model.create([jsonObj], function (err) {
+            _this.SubscriptionItem.model.create([jsonObj], function (err) {
                 if (err) {
-                    console.log("object creation failed");
+                    console.log('object creation failed');
                 }
             });
-            res.send(this.idGenerator.toString());
-            this.idGenerator++;
+            res.send(_this.idGenerator.toString());
+            _this.idGenerator++;
         });
         // get specific item based on itemId
         router.get("/app/list/:listId/item/:itemId/", function (req, res) {
