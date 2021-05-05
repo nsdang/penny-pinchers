@@ -98,7 +98,7 @@ listsCollection.insert({
 
     
 db.createCollection('subscriptionItems')
-itemcollections = db.getCollection("items")
+itemcollections = db.getCollection("subscriptionItems")
 itemcollections.remove({})
 itemcollections.insert({
     listId : 1,
