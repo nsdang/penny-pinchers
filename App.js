@@ -60,6 +60,19 @@ var App = /** @class */ (function () {
             res.send(_this.idGenerator.toString());
             _this.idGenerator++;
         });
+        // Create a new user
+        router.post('/app/user/', function (req, res) {
+            console.log(req.body);
+            var jsonObj = req.body;
+            jsonObj.userId = _this.idGenerator;
+            _this.User.model.create([jsonObj], function (err) {
+                if (err) {
+                    console.log('object creation failed');
+                }
+            });
+            res.send(_this.idGenerator.toString());
+            _this.idGenerator++;
+        });
         /*
             // update existed item
             router.put("/app/items/:itemId", (req, res) => {

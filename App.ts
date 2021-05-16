@@ -70,6 +70,20 @@ class App {
       res.send(this.idGenerator.toString());
       this.idGenerator++;
   });
+
+  // Create a new user
+  router.post('/app/user/', (req, res) => {
+    console.log(req.body);
+    var jsonObj = req.body;
+    jsonObj.userId = this.idGenerator;
+    this.User.model.create([jsonObj], (err) => {
+        if (err) {
+            console.log('object creation failed');
+        }
+    });
+    res.send(this.idGenerator.toString());
+    this.idGenerator++;
+});
 /*
     // update existed item
     router.put("/app/items/:itemId", (req, res) => {
