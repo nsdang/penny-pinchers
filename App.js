@@ -73,6 +73,12 @@ var App = /** @class */ (function () {
             res.send(_this.idGenerator.toString());
             _this.idGenerator++;
         });
+        // Retrieve a single list by userId
+        router.get("/app/list/user/:userId", function (req, res) {
+            var userId = +req.params.userId;
+            console.log("Query a single list by userId");
+            _this.SubscriptionList.retrieveASingleList(res, { userId: userId });
+        });
         /*
             // update existed item
             router.put("/app/items/:itemId", (req, res) => {
