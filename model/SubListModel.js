@@ -27,6 +27,12 @@ var SubListModel = /** @class */ (function () {
             response.json(lists);
         });
     };
+    SubListModel.prototype.retrieveASingleList = function (response, filter) {
+        var query = this.model.findOne(filter);
+        query.exec(function (err, list) {
+            response.json(list);
+        });
+    };
     return SubListModel;
 }());
 exports.SubListModel = SubListModel;

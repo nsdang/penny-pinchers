@@ -36,5 +36,13 @@ class SubListModel {
             response.json(lists);
         });
     }
+
+    public retrieveASingleList(response:any, filter: Object): any {
+        var query = this.model.findOne(filter);
+        query.exec((err, list) => {
+          response.json(list);
+        });
+    }
+    
 }
 export {SubListModel};
