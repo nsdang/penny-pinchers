@@ -11,6 +11,7 @@ var bodyParser = require("body-parser");
 //var Q = require('q');
 var SubListModel_1 = require("./model/SubListModel");
 var SubItemModel_1 = require("./model/SubItemModel");
+var UserModel_1 = require("./model/UserModel");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
@@ -21,6 +22,7 @@ var App = /** @class */ (function () {
         this.idGenerator = 102;
         this.SubscriptionList = new SubListModel_1.SubListModel();
         this.SubscriptionItem = new SubItemModel_1.SubItemModel();
+        this.User = new UserModel_1.UserModel();
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
@@ -67,6 +69,7 @@ var App = /** @class */ (function () {
               res.send("PUT: /app/items/:itemId");
             });
         */
+        // Create a new user
         this.expressApp.use("/", router);
         this.expressApp.use("/app/json/", express.static(__dirname + "/app/json"));
         this.expressApp.use("/images", express.static(__dirname + "/img"));

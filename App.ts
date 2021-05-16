@@ -9,6 +9,7 @@ import * as bodyParser from "body-parser";
 
 import { SubListModel } from "./model/SubListModel";
 import { SubItemModel } from "./model/SubItemModel";
+import { UserModel } from "./model/UserModel";
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -16,6 +17,7 @@ class App {
   public expressApp: express.Application;
   public SubscriptionList: SubListModel;
   public SubscriptionItem: SubItemModel;
+  public User: UserModel;
   public idGenerator: number;
 
   //Run configuration methods on the Express instance.
@@ -26,6 +28,7 @@ class App {
     this.idGenerator = 102;
     this.SubscriptionList = new SubListModel();
     this.SubscriptionItem = new SubItemModel();
+    this.User = new UserModel();
   }
 
   // Configure Express middleware.
@@ -67,8 +70,6 @@ class App {
       res.send(this.idGenerator.toString());
       this.idGenerator++;
   });
-
-    
 /*
     // update existed item
     router.put("/app/items/:itemId", (req, res) => {
@@ -78,7 +79,8 @@ class App {
       res.send("PUT: /app/items/:itemId");
     });
 */
-    
+    // Create a new user
+
 
     this.expressApp.use("/", router);
 
