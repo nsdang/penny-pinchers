@@ -36,7 +36,7 @@ class SubItemModel {
     );
   }
 
-  // Get all items based on listid
+  // Get all items 
   public retrieveAllItems(response: any, filter: Object): any {
     var query = this.model.find(filter); 
     query.exec((err, items) => {

@@ -29,14 +29,15 @@ class UserModel {
                 isPremium: Boolean,
                 phoneNo: String,
                 email: String,
-            }, {collection: 'users'}
+            }, {collection: 'UserList'}
         );
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<IUserModel>("Users", this.schema);
+        this.model = mongooseConnection.model<IUserModel>("User", this.schema);
     }
 
+    /*** should be deleted */
     public retrieveAllUsers(response:any): any {
         var query = this.model.find({});
         query.exec( (err, userArray) => {
@@ -44,6 +45,7 @@ class UserModel {
         });
     }
 
+    /*** should be deleted */
     public retrieveUserCount(response:any): any {
         console.log("retrieve User Count ...");
         var query = this.model.estimatedDocumentCount();
@@ -52,6 +54,24 @@ class UserModel {
             response.json(numberOfUsers) ;
         });
     }
+
+    // retrieve info of a single user
+    public retrieveASingleUser(response: any, filter: Object) : any {
+        var query = this.model.findOne(filter);
+        query.exec((err, user) => {
+            response.json(user);
+          });
+    }
+
+    // modify info of a single user
+    public updateUserInfo (response: any, filter: Object, reqBody: Object ) : any {
+        var query = this.model.findByIdAndUpdate(filter, reqBody);
+        query.exec((err, result) => {
+            response.json(result);
+        });
+    }
+
+    
 
 }
 export {UserModel};

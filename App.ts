@@ -42,57 +42,41 @@ class App {
   private routes(): void {
     let router = express.Router();
 
+  /********************************* ITEM ***********************************/
     // get all items
     router.get("/app/list/:listId", (req, res) => {
+      console.log();
       var listid : number = +req.params.listId;
-      console.log("Query all items in the list in db");
+      console.log("Retrieve all items in the list with listId: ", listid);
       this.SubscriptionItem.retrieveAllItems(res, {listId:listid});
     });
 
     // get specific item based on itemId
     router.get("/app/list/:listId/item/:itemId/", (req, res) => {
+      console.log();
       var listid : number = +req.params.listId;
       var itemid : number = +req.params.itemId;
-      console.log("listId = ", listid, " itemid = ", itemid);
+      console.log("Retrieve item in list with listId = ", listid, " and itemid = ", itemid);
       this.SubscriptionItem.retrieveItemDetails(res, {listId: listid, itemId: itemid});
     });
 
     // post an item
     router.post('/app/item/', (req, res) => {
+      console.log();
+      console.log("Create a new item");
       console.log(req.body);
       var jsonObj = req.body;
       //jsonObj.listId = this.idGenerator;
       this.SubscriptionItem.model.create([jsonObj], (err) => {
           if (err) {
-              console.log('object creation failed');
+              console.log('item creation failed');
           }
       });
       res.send(this.idGenerator.toString());
       this.idGenerator++;
   });
 
-  // Create a new user
-  router.post('/app/user/', (req, res) => {
-    console.log(req.body);
-    var jsonObj = req.body;
-    jsonObj.userId = this.idGenerator;
-    this.User.model.create([jsonObj], (err) => {
-        if (err) {
-            console.log('object creation failed');
-        }
-    });
-    res.send(this.idGenerator.toString());
-    this.idGenerator++;
-});
-
-// Retrieve a single list by userId
-router.get("/app/list/user/:userId", (req, res) => {
-  var userId : number = +req.params.userId;
-  console.log("Query a single list by userId");
-  this.SubscriptionList.retrieveASingleList(res, {userId:userId});
-});
-
-/*
+  /*
     // update existed item
     router.put("/app/items/:itemId", (req, res) => {
       console.log(req.body);
@@ -101,11 +85,51 @@ router.get("/app/list/user/:userId", (req, res) => {
       res.send("PUT: /app/items/:itemId");
     });
 */
-    // Create a new user
 
+/*********************************** LIST ***********************************/
+// Retrieve a single list by userId
+  router.get("/app/list/user/:userId", (req, res) => {
+    console.log();
+    var userId : number = +req.params.userId;
+    console.log("Retrieve a single list by userId: ", userId);
+    this.SubscriptionList.retrieveASingleList(res, {userId:userId});
+  });
 
+/************************************ USER *********************************/
+  // Create a new user
+  router.post('/app/user/', (req, res) => {
+    console.log();
+    console.log("Create a new user");
+    console.log(req.body);
+    var jsonObj = req.body;
+    jsonObj.userId = this.idGenerator;
+    this.User.model.create([jsonObj], (err) => {
+        if (err) {
+            console.log('user creation failed');
+        }
+    });
+    res.send(this.idGenerator.toString());
+    this.idGenerator++;
+  });
+
+  // Retrieve a single user by userId
+  router.get("/app/user/:userId", (req, res) => {
+    console.log();
+    var userId : number = +req.params.userId;
+    console.log("Retrieve info of a user with userId = ", userId);
+    this.User.retrieveASingleUser(res, {userId:userId});
+  });
+
+  // Modify a single user information based on userId
+  router.put("/app/user/:userId", (req, res) => {
+    console.log();
+    var userId : number = +req.params.userId;
+    console.log("Update information of a user with userId = ", userId);
+    console.log (req.body);
+    this.User.updateUserInfo(res, {userId:userId}, req.body);
+  });
+   
     this.expressApp.use("/", router);
-
     this.expressApp.use("/app/json/", express.static(__dirname + "/app/json"));
     this.expressApp.use("/images", express.static(__dirname + "/img"));
     this.expressApp.use("/", express.static(__dirname + "/pages"));

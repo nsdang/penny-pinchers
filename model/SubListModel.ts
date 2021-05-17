@@ -29,14 +29,14 @@ class SubListModel {
     }
 
     // retrieve all lists
-    public retrieveAllLists(response:any)
-    {
+    public retrieveAllLists(response:any) {
         var query = this.model.find({});
         query.exec((err, lists) => {
             response.json(lists);
         });
     }
 
+    // retrieve a single list
     public retrieveASingleList(response:any, filter: Object): any {
         var query = this.model.findOne(filter);
         query.exec((err, list) => {

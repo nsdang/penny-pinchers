@@ -24,23 +24,39 @@ var UserModel = /** @class */ (function () {
             isPremium: Boolean,
             phoneNo: String,
             email: String
-        }, { collection: 'users' });
+        }, { collection: 'UserList' });
     };
     UserModel.prototype.createModel = function () {
-        this.model = mongooseConnection.model("Users", this.schema);
+        this.model = mongooseConnection.model("User", this.schema);
     };
+    /*** should be deleted */
     UserModel.prototype.retrieveAllUsers = function (response) {
         var query = this.model.find({});
         query.exec(function (err, userArray) {
             response.json(userArray);
         });
     };
+    /*** should be deleted */
     UserModel.prototype.retrieveUserCount = function (response) {
         console.log("retrieve User Count ...");
         var query = this.model.estimatedDocumentCount();
         query.exec(function (err, numberOfUsers) {
             console.log("numberOfUsers: " + numberOfUsers);
             response.json(numberOfUsers);
+        });
+    };
+    // retrieve info of a single user
+    UserModel.prototype.retrieveASingleUser = function (response, filter) {
+        var query = this.model.findOne(filter);
+        query.exec(function (err, user) {
+            response.json(user);
+        });
+    };
+    // modify info of a single user
+    UserModel.prototype.updateUserInfo = function (response, filter, reqBody) {
+        var query = this.model.findByIdAndUpdate(filter, reqBody);
+        query.exec(function (err, result) {
+            response.json(result);
         });
     };
     return UserModel;

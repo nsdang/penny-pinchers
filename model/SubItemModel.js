@@ -23,7 +23,7 @@ var SubItemModel = /** @class */ (function () {
     SubItemModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("SubscriptionItems", this.schema);
     };
-    // Get all items based on listid
+    // Get all items 
     SubItemModel.prototype.retrieveAllItems = function (response, filter) {
         var query = this.model.find(filter);
         query.exec(function (err, items) {
