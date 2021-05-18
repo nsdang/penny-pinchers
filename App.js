@@ -47,9 +47,9 @@ var App = /** @class */ (function () {
             console.log();
             var userid = +req.params.userId;
             console.log("Retrieve all items in the list with userId: ", userid);
-            var listId = _this.SubscriptionList.retrieveASingleListId({ userId: userid }).then(function (listId) {
-                console.log(listId);
-                _this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
+            _this.SubscriptionList.retrieveASingleListId({ userId: userid }).then(function (listId) {
+                if (listId)
+                    _this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
             });
             // console.log(listId);
             // this.SubscriptionItem.retrieveAllItems(res, { listId: listId });

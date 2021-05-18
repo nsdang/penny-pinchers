@@ -56,12 +56,9 @@ class App {
       console.log();
       var userid: number = +req.params.userId;
       console.log("Retrieve all items in the list with userId: ", userid);
-      var listId = this.SubscriptionList.retrieveASingleListId({ userId: userid }).then((listId) => {
-        console.log(listId);
-        this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
+      this.SubscriptionList.retrieveASingleListId({ userId: userid }).then((listId) => {
+        if(listId)  this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
       });
-      // console.log(listId);
-      // this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
     });
 
     // get specific item based on itemId
