@@ -87,6 +87,11 @@ class App {
       );
     });
 
+    router.delete("/app/item/:itemId/", (req, res) => {
+      var itemId: number = +req.params.itemId;
+      this.SubscriptionItem.deleteItem(res, {itemId: itemId});
+    });
+
     /*********************************** LIST ***********************************/
     // Retrieve a single list by userId
     router.get("/app/list/user/:userId", (req, res) => {

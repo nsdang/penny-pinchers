@@ -43,15 +43,10 @@ var App = /** @class */ (function () {
             _this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
         });
         // get specific item based on itemId
-        router.get("/app/list/:listId/item/:itemId/", function (req, res) {
-            console.log();
-            var listid = +req.params.listId;
+        router.get("/app/item/:itemId", function (req, res) {
             var itemid = +req.params.itemId;
-            console.log("Retrieve item in list with listId = ", listid, " and itemid = ", itemid);
-            _this.SubscriptionItem.retrieveItemDetails(res, {
-                listId: listid,
-                itemId: itemid
-            });
+            console.log(" itemid = ", itemid);
+            _this.SubscriptionItem.retrieveItemDetails(res, { itemId: itemid });
         });
         // post an item
         router.post("/app/item/", function (req, res) {
@@ -75,6 +70,10 @@ var App = /** @class */ (function () {
             var updateDetail = req.body;
             //update existed record
             _this.SubscriptionItem.updateItemDetails(res, conditionDetail, updateDetail);
+        });
+        router["delete"]("/app/item/:itemId/", function (req, res) {
+            var itemId = +req.params.itemId;
+            _this.SubscriptionItem.deleteItem(res, { itemId: itemId });
         });
         /*********************************** LIST ***********************************/
         // Retrieve a single list by userId

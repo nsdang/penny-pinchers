@@ -23,7 +23,7 @@ var SubItemModel = /** @class */ (function () {
     SubItemModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("SubscriptionItems", this.schema);
     };
-    // Get all items 
+    // Get all items
     SubItemModel.prototype.retrieveAllItems = function (response, filter) {
         var query = this.model.find(filter);
         query.exec(function (err, items) {
@@ -47,6 +47,16 @@ var SubItemModel = /** @class */ (function () {
                 return;
             }
             response.json(doc);
+        });
+    };
+    // Delete a single item
+    SubItemModel.prototype.deleteItem = function (response, filter) {
+        this.model.deleteOne(filter, function (error, mongooseDeleteResult) {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            response.json(mongooseDeleteResult);
         });
     };
     return SubItemModel;

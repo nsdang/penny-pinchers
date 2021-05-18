@@ -36,9 +36,9 @@ class SubItemModel {
     );
   }
 
-  // Get all items 
+  // Get all items
   public retrieveAllItems(response: any, filter: Object): any {
-    var query = this.model.find(filter); 
+    var query = this.model.find(filter);
     query.exec((err, items) => {
       response.json(items);
     });
@@ -53,7 +53,11 @@ class SubItemModel {
   }
 
   // Update a single item detail
-  public updateItemDetails(response: any, conditionDetail: Object, updateDetail: Object): any{
+  public updateItemDetails(
+    response: any,
+    conditionDetail: Object,
+    updateDetail: Object
+  ): any {
     const condition = conditionDetail;
     const update = updateDetail;
     this.model.findOneAndUpdate(condition, update, (err, doc) => {
@@ -61,8 +65,19 @@ class SubItemModel {
         console.log("object update failed");
         return;
       }
-      response.json(doc)
-    })
+      response.json(doc);
+    });
+  }
+
+  // Delete a single item
+  public deleteItem(response: any, filter: Object): any {
+    this.model.deleteOne(filter, (error, mongooseDeleteResult) => {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      response.json(mongooseDeleteResult);
+    });
   }
 }
 export { SubItemModel };
