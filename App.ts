@@ -52,20 +52,10 @@ class App {
     });
 
     // get specific item based on itemId
-    router.get("/app/list/:listId/item/:itemId/", (req, res) => {
-      console.log();
-      var listid: number = +req.params.listId;
+    router.get("/app/item/:itemId", (req, res) => {
       var itemid: number = +req.params.itemId;
-      console.log(
-        "Retrieve item in list with listId = ",
-        listid,
-        " and itemid = ",
-        itemid
-      );
-      this.SubscriptionItem.retrieveItemDetails(res, {
-        listId: listid,
-        itemId: itemid,
-      });
+      console.log(" itemid = ", itemid);
+      this.SubscriptionItem.retrieveItemDetails(res, { itemId: itemid });
     });
 
     // post an item
@@ -141,6 +131,7 @@ class App {
     });
 
     this.expressApp.use("/", router);
+
     this.expressApp.use("/app/json/", express.static(__dirname + "/app/json"));
     this.expressApp.use("/images", express.static(__dirname + "/img"));
     this.expressApp.use("/", express.static(__dirname + "/pages"));
