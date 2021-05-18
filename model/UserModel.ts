@@ -37,24 +37,6 @@ class UserModel {
         this.model = mongooseConnection.model<IUserModel>("User", this.schema);
     }
 
-    /*** should be deleted */
-    public retrieveAllUsers(response:any): any {
-        var query = this.model.find({});
-        query.exec( (err, userArray) => {
-            response.json(userArray) ;
-        });
-    }
-
-    /*** should be deleted */
-    public retrieveUserCount(response:any): any {
-        console.log("retrieve User Count ...");
-        var query = this.model.estimatedDocumentCount();
-        query.exec( (err, numberOfUsers) => {
-            console.log("numberOfUsers: " + numberOfUsers);
-            response.json(numberOfUsers) ;
-        });
-    }
-
     // retrieve info of a single user
     public retrieveASingleUser(response: any, filter: Object) : any {
         var query = this.model.findOne(filter);
