@@ -54,9 +54,21 @@ var UserModel = /** @class */ (function () {
     };
     // modify info of a single user
     UserModel.prototype.updateUserInfo = function (response, filter, reqBody) {
-        var query = this.model.findByIdAndUpdate(filter, reqBody);
+        var query = this.model.findOneAndUpdate(filter, reqBody);
         query.exec(function (err, result) {
-            response.json(result);
+            if (err) {
+                console.log("Error of update: ");
+                console.log(err);
+            }
+        });
+        // query to return json file of the updated document
+        var check_result_query = this.model.find(filter);
+        check_result_query.exec(function (err, updated_user) {
+            if (err) {
+                console.log("Error of confirm update: ");
+                console.log(err);
+            }
+            response.json(updated_user);
         });
     };
     return UserModel;

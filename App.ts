@@ -64,7 +64,7 @@ class App {
     router.post('/app/item/', (req, res) => {
       console.log();
       console.log("Create a new item");
-      console.log(req.body);
+      console.log("Req.body: ", req.body);
       var jsonObj = req.body;
       //jsonObj.listId = this.idGenerator;
       this.SubscriptionItem.model.create([jsonObj], (err) => {
@@ -100,7 +100,7 @@ class App {
   router.post('/app/user/', (req, res) => {
     console.log();
     console.log("Create a new user");
-    console.log(req.body);
+    console.log("Req.body: ", req.body);
     var jsonObj = req.body;
     jsonObj.userId = this.idGenerator;
     this.User.model.create([jsonObj], (err) => {
@@ -125,7 +125,7 @@ class App {
     console.log();
     var userId : number = +req.params.userId;
     console.log("Update information of a user with userId = ", userId);
-    console.log (req.body);
+    console.log("Req.body: ", req.body);
     this.User.updateUserInfo(res, {userId:userId}, req.body);
   });
    
