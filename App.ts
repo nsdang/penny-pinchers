@@ -59,6 +59,9 @@ class App {
     // post an item
     router.post('/app/item/', (req, res) => {
       console.log(req.body);
+      console.log();
+      console.log("Create a new item");
+      console.log("Req.body: ", req.body);
       var jsonObj = req.body;
       //jsonObj.listId = this.idGenerator;
       this.SubscriptionItem.model.create([jsonObj], (err) => {
@@ -72,7 +75,9 @@ class App {
 
   // Create a new user
   router.post('/app/user/', (req, res) => {
-    console.log(req.body);
+    console.log();
+    console.log("Create a new user");
+    console.log("Req.body: ", req.body);
     var jsonObj = req.body;
     jsonObj.userId = this.idGenerator;
     this.User.model.create([jsonObj], (err) => {
@@ -103,6 +108,15 @@ router.get("/app/list/user/:userId", (req, res) => {
     // Create a new user
 
 
+  // Modify a single user information based on userId
+  router.put("/app/user/:userId", (req, res) => {
+    console.log();
+    var userId : number = +req.params.userId;
+    console.log("Update information of a user with userId = ", userId);
+    console.log("Req.body: ", req.body);
+    this.User.updateUserInfo(res, {userId:userId}, req.body);
+  });
+   
     this.expressApp.use("/", router);
 
     this.expressApp.use("/app/json/", express.static(__dirname + "/app/json"));
