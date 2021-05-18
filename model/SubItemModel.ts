@@ -51,5 +51,18 @@ class SubItemModel {
       response.json(item);
     });
   }
+
+  // Update a single item detail
+  public updateItemDetails(response: any, conditionDetail: Object, updateDetail: Object): any{
+    const condition = conditionDetail;
+    const update = updateDetail;
+    this.model.findOneAndUpdate(condition, update, (err, doc) => {
+      if (err) {
+        console.log("object update failed");
+        return;
+      }
+      response.json(doc)
+    })
+  }
 }
 export { SubItemModel };

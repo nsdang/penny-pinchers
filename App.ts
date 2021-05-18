@@ -42,93 +42,104 @@ class App {
   private routes(): void {
     let router = express.Router();
 
-  /********************************* ITEM ***********************************/
+    /********************************* ITEM ***********************************/
     // get all items
     router.get("/app/list/:listId", (req, res) => {
       console.log();
-      var listid : number = +req.params.listId;
+      var listid: number = +req.params.listId;
       console.log("Retrieve all items in the list with listId: ", listid);
-      this.SubscriptionItem.retrieveAllItems(res, {listId:listid});
+      this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
     });
 
     // get specific item based on itemId
     router.get("/app/list/:listId/item/:itemId/", (req, res) => {
       console.log();
-      var listid : number = +req.params.listId;
-      var itemid : number = +req.params.itemId;
-      console.log("Retrieve item in list with listId = ", listid, " and itemid = ", itemid);
-      this.SubscriptionItem.retrieveItemDetails(res, {listId: listid, itemId: itemid});
+      var listid: number = +req.params.listId;
+      var itemid: number = +req.params.itemId;
+      console.log(
+        "Retrieve item in list with listId = ",
+        listid,
+        " and itemid = ",
+        itemid
+      );
+      this.SubscriptionItem.retrieveItemDetails(res, {
+        listId: listid,
+        itemId: itemid,
+      });
     });
 
     // post an item
-    router.post('/app/item/', (req, res) => {
+    router.post("/app/item/", (req, res) => {
       console.log();
       console.log("Create a new item");
       console.log("Req.body: ", req.body);
       var jsonObj = req.body;
       //jsonObj.listId = this.idGenerator;
       this.SubscriptionItem.model.create([jsonObj], (err) => {
-          if (err) {
-              console.log('item creation failed');
-          }
+        if (err) {
+          console.log("item creation failed");
+        }
       });
       res.send(this.idGenerator.toString());
       this.idGenerator++;
-  });
+    });
 
-  /*
     // update existed item
     router.put("/app/items/:itemId", (req, res) => {
-      console.log(req.body);
-      var jsonObj = req.body;
+      var itemID: number = +req.params.itemId;
+      var conditionDetail = { itemId: itemID };
+      var updateDetail = req.body;
       //update existed record
-      res.send("PUT: /app/items/:itemId");
+      this.SubscriptionItem.updateItemDetails(
+        res,
+        conditionDetail,
+        updateDetail
+      );
     });
-*/
 
-/*********************************** LIST ***********************************/
-// Retrieve a single list by userId
-  router.get("/app/list/user/:userId", (req, res) => {
-    console.log();
-    var userId : number = +req.params.userId;
-    console.log("Retrieve a single list by userId: ", userId);
-    this.SubscriptionList.retrieveASingleList(res, {userId:userId});
-  });
+    /*********************************** LIST ***********************************/
+    // Retrieve a single list by userId
+    router.get("/app/list/user/:userId", (req, res) => {
+      console.log();
+      var userId: number = +req.params.userId;
+      console.log("Retrieve a single list by userId: ", userId);
+      this.SubscriptionList.retrieveASingleList(res, { userId: userId });
+    });
 
-/************************************ USER *********************************/
-  // Create a new user
-  router.post('/app/user/', (req, res) => {
-    console.log();
-    console.log("Create a new user");
-    console.log("Req.body: ", req.body);
-    var jsonObj = req.body;
-    jsonObj.userId = this.idGenerator;
-    this.User.model.create([jsonObj], (err) => {
+    /************************************ USER *********************************/
+    // Create a new user
+    router.post("/app/user/", (req, res) => {
+      console.log();
+      console.log("Create a new user");
+      console.log("Req.body: ", req.body);
+      var jsonObj = req.body;
+      jsonObj.userId = this.idGenerator;
+      this.User.model.create([jsonObj], (err) => {
         if (err) {
-            console.log('user creation failed');
+          console.log("user creation failed");
         }
+      });
+      res.send(this.idGenerator.toString());
+      this.idGenerator++;
     });
-    res.send(this.idGenerator.toString());
-    this.idGenerator++;
-  });
 
-  // Retrieve a single user by userId
-  router.get("/app/user/:userId", (req, res) => {
-    console.log();
-    var userId : number = +req.params.userId;
-    console.log("Retrieve info of a user with userId = ", userId);
-    this.User.retrieveASingleUser(res, {userId:userId});
-  });
+    // Retrieve a single user by userId
+    router.get("/app/user/:userId", (req, res) => {
+      console.log();
+      var userId: number = +req.params.userId;
+      console.log("Retrieve info of a user with userId = ", userId);
+      this.User.retrieveASingleUser(res, { userId: userId });
+    });
 
-  // Modify a single user information based on userId
-  router.put("/app/user/:userId", (req, res) => {
-    console.log();
-    var userId : number = +req.params.userId;
-    console.log("Update information of a user with userId = ", userId);
-    console.log("Req.body: ", req.body);
-    this.User.updateUserInfo(res, {userId:userId}, req.body);
-  });
-   
+    // Modify a single user information based on userId
+    router.put("/app/user/:userId", (req, res) => {
+      console.log();
+      var userId: number = +req.params.userId;
+      console.log("Update information of a user with userId = ", userId);
+      console.log("Req.body: ", req.body);
+      this.User.updateUserInfo(res, { userId: userId }, req.body);
+    });
+
     this.expressApp.use("/", router);
     this.expressApp.use("/app/json/", express.static(__dirname + "/app/json"));
     this.expressApp.use("/images", express.static(__dirname + "/img"));

@@ -48,10 +48,13 @@ var App = /** @class */ (function () {
             var listid = +req.params.listId;
             var itemid = +req.params.itemId;
             console.log("Retrieve item in list with listId = ", listid, " and itemid = ", itemid);
-            _this.SubscriptionItem.retrieveItemDetails(res, { listId: listid, itemId: itemid });
+            _this.SubscriptionItem.retrieveItemDetails(res, {
+                listId: listid,
+                itemId: itemid
+            });
         });
         // post an item
-        router.post('/app/item/', function (req, res) {
+        router.post("/app/item/", function (req, res) {
             console.log();
             console.log("Create a new item");
             console.log("Req.body: ", req.body);
@@ -59,21 +62,20 @@ var App = /** @class */ (function () {
             //jsonObj.listId = this.idGenerator;
             _this.SubscriptionItem.model.create([jsonObj], function (err) {
                 if (err) {
-                    console.log('item creation failed');
+                    console.log("item creation failed");
                 }
             });
             res.send(_this.idGenerator.toString());
             _this.idGenerator++;
         });
-        /*
-          // update existed item
-          router.put("/app/items/:itemId", (req, res) => {
-            console.log(req.body);
-            var jsonObj = req.body;
+        // update existed item
+        router.put("/app/items/:itemId", function (req, res) {
+            var itemID = +req.params.itemId;
+            var conditionDetail = { itemId: itemID };
+            var updateDetail = req.body;
             //update existed record
-            res.send("PUT: /app/items/:itemId");
-          });
-      */
+            _this.SubscriptionItem.updateItemDetails(res, conditionDetail, updateDetail);
+        });
         /*********************************** LIST ***********************************/
         // Retrieve a single list by userId
         router.get("/app/list/user/:userId", function (req, res) {
@@ -84,7 +86,7 @@ var App = /** @class */ (function () {
         });
         /************************************ USER *********************************/
         // Create a new user
-        router.post('/app/user/', function (req, res) {
+        router.post("/app/user/", function (req, res) {
             console.log();
             console.log("Create a new user");
             console.log("Req.body: ", req.body);
@@ -92,7 +94,7 @@ var App = /** @class */ (function () {
             jsonObj.userId = _this.idGenerator;
             _this.User.model.create([jsonObj], function (err) {
                 if (err) {
-                    console.log('user creation failed');
+                    console.log("user creation failed");
                 }
             });
             res.send(_this.idGenerator.toString());

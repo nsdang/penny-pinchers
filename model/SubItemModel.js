@@ -37,6 +37,18 @@ var SubItemModel = /** @class */ (function () {
             response.json(item);
         });
     };
+    // Update a single item detail
+    SubItemModel.prototype.updateItemDetails = function (response, conditionDetail, updateDetail) {
+        var condition = conditionDetail;
+        var update = updateDetail;
+        this.model.findOneAndUpdate(condition, update, function (err, doc) {
+            if (err) {
+                console.log("object update failed");
+                return;
+            }
+            response.json(doc);
+        });
+    };
     return SubItemModel;
 }());
 exports.SubItemModel = SubItemModel;
