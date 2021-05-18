@@ -44,5 +44,12 @@ class SubListModel {
         });
     }
     
+    // retrieve a single list
+    public retrieveASingleListId(filter: Object): any {
+        var query = this.model.findOne(filter);
+        return new Promise<any>(query.exec((err, list) => {
+          return list.listId;
+        }));
+    }
 }
 export {SubListModel};

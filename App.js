@@ -35,12 +35,24 @@ var App = /** @class */ (function () {
         var _this = this;
         var router = express.Router();
         /********************************* ITEM ***********************************/
-        // get all items
-        router.get("/app/list/:listId", function (req, res) {
+        // get all items using listId
+        router.get("/app/item/list/:listId", function (req, res) {
             console.log();
             var listid = +req.params.listId;
             console.log("Retrieve all items in the list with listId: ", listid);
             _this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
+        });
+        // get all items using userId
+        router.get("/app/item/user/:userId", function (req, res) {
+            console.log();
+            var userid = +req.params.userId;
+            console.log("Retrieve all items in the list with userId: ", userid);
+            var listId = _this.SubscriptionList.retrieveASingleListId({ userId: userid }).then(function (listId) {
+                console.log(listId);
+                _this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
+            });
+            // console.log(listId);
+            // this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
         });
         // get specific item based on itemId
         router.get("/app/item/:itemId", function (req, res) {
@@ -64,7 +76,7 @@ var App = /** @class */ (function () {
             _this.idGenerator++;
         });
         // update existed item
-        router.put("/app/items/:itemId", function (req, res) {
+        router.put("/app/item/:itemId", function (req, res) {
             var itemID = +req.params.itemId;
             var conditionDetail = { itemId: itemID };
             var updateDetail = req.body;
@@ -90,7 +102,7 @@ var App = /** @class */ (function () {
             console.log("Create a new user");
             console.log("Req.body: ", req.body);
             var jsonObj = req.body;
-            jsonObj.userId = _this.idGenerator;
+            //jsonObj.userId = this.idGenerator;
             _this.User.model.create([jsonObj], function (err) {
                 if (err) {
                     console.log("user creation failed");

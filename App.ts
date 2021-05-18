@@ -43,12 +43,25 @@ class App {
     let router = express.Router();
 
     /********************************* ITEM ***********************************/
-    // get all items
-    router.get("/app/list/:listId", (req, res) => {
+    // get all items using listId
+    router.get("/app/item/list/:listId", (req, res) => {
       console.log();
       var listid: number = +req.params.listId;
       console.log("Retrieve all items in the list with listId: ", listid);
       this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
+    });
+
+    // get all items using userId
+    router.get("/app/item/user/:userId", (req, res) => {
+      console.log();
+      var userid: number = +req.params.userId;
+      console.log("Retrieve all items in the list with userId: ", userid);
+      var listId = this.SubscriptionList.retrieveASingleListId({ userId: userid }).then((listId) => {
+        console.log(listId);
+        this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
+      });
+      // console.log(listId);
+      // this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
     });
 
     // get specific item based on itemId
@@ -75,7 +88,7 @@ class App {
     });
 
     // update existed item
-    router.put("/app/items/:itemId", (req, res) => {
+    router.put("/app/item/:itemId", (req, res) => {
       var itemID: number = +req.params.itemId;
       var conditionDetail = { itemId: itemID };
       var updateDetail = req.body;
@@ -108,7 +121,7 @@ class App {
       console.log("Create a new user");
       console.log("Req.body: ", req.body);
       var jsonObj = req.body;
-      jsonObj.userId = this.idGenerator;
+      //jsonObj.userId = this.idGenerator;
       this.User.model.create([jsonObj], (err) => {
         if (err) {
           console.log("user creation failed");

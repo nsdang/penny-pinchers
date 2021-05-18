@@ -34,6 +34,13 @@ var SubListModel = /** @class */ (function () {
             response.json(list);
         });
     };
+    // retrieve a single list
+    SubListModel.prototype.retrieveASingleListId = function (filter) {
+        var query = this.model.findOne(filter);
+        return new Promise(query.exec(function (err, list) {
+            return list.listId;
+        }));
+    };
     return SubListModel;
 }());
 exports.SubListModel = SubListModel;
