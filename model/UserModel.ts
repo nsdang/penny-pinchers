@@ -53,18 +53,8 @@ class UserModel {
                 console.log("Error of update: ");
                 console.log(err);
             }
-            
+            response.json(result);
         });
-        // query to return json file of the updated document
-        var check_result_query = this.model.find(filter);
-        check_result_query.exec((err, updated_user) => {
-            if (err) {
-                console.log("Error of confirm update: ");
-                console.log(err);
-            }
-            response.json(updated_user);
-        });
-
     }
 
     

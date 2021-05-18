@@ -47,12 +47,10 @@ var App = /** @class */ (function () {
             console.log();
             var userid = +req.params.userId;
             console.log("Retrieve all items in the list with userId: ", userid);
-            _this.SubscriptionList.retrieveASingleListId({ userId: userid }).then(function (listId) {
+            _this.SubscriptionList.retrieveListId({ userId: userid }).then(function (listId) {
                 if (listId)
                     _this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
             });
-            // console.log(listId);
-            // this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
         });
         // get specific item based on itemId
         router.get("/app/item/:itemId", function (req, res) {
@@ -83,17 +81,26 @@ var App = /** @class */ (function () {
             //update existed record
             _this.SubscriptionItem.updateItemDetails(res, conditionDetail, updateDetail);
         });
+        // delete an item
         router["delete"]("/app/item/:itemId/", function (req, res) {
             var itemId = +req.params.itemId;
             _this.SubscriptionItem.deleteItem(res, { itemId: itemId });
         });
         /*********************************** LIST ***********************************/
-        // Retrieve a single list by userId
+        // Retrieve a list's information (not including items) by userId
         router.get("/app/list/user/:userId", function (req, res) {
             console.log();
             var userId = +req.params.userId;
             console.log("Retrieve a single list by userId: ", userId);
-            _this.SubscriptionList.retrieveASingleList(res, { userId: userId });
+            _this.SubscriptionList.retrieveListInfo(res, { userId: userId });
+        });
+        // Modify a list by userId
+        router.put("/app/list/user/:userId", function (req, res) {
+            console.log();
+            var userid = +req.params.userId;
+            console.log("Update list's information with userId = ", userid);
+            console.log("Req.body: ", req.body);
+            _this.SubscriptionList.updateListInfo(res, { userId: userid }, req.body);
         });
         /************************************ USER *********************************/
         // Create a new user

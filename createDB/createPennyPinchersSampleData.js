@@ -108,6 +108,7 @@ itemcollections.insert({
     dueDate : 6/2/2021,
     price : 12,
     isArchived : false,
+    subscriptionType: "monthly",
 })
 
 itemcollections.insert({
@@ -118,6 +119,7 @@ itemcollections.insert({
     dueDate : 6/4/2021,
     price : 15,
     isArchived : false,
+    subscriptionType: "monthly",
 })
 
 itemcollections.insert({
@@ -128,6 +130,7 @@ itemcollections.insert({
         dueDate : 6/4/2021,
         price : 10,
         isArchived : false,
+        subscriptionType: "monthly",
 })
             
 itemcollections.insert(
@@ -139,6 +142,7 @@ itemcollections.insert(
     dueDate : 6/4/2021,
     price : 7,
     isArchived : false,
+    subscriptionType: "trial",
 })
     
     itemcollections.insert(
@@ -150,5 +154,6 @@ itemcollections.insert(
         dueDate : 6/4/2021,
         price : 11,
         isArchived : false,
+        subscriptionType: "annually",
     })
 

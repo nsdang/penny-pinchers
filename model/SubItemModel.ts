@@ -24,6 +24,7 @@ class SubItemModel {
         dueDate: Date,
         price: Number,
         isArchived: Boolean,
+        subscriptionType: String,
       },
       { collection: "subscriptionItems" }
     );

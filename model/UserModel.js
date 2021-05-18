@@ -29,22 +29,6 @@ var UserModel = /** @class */ (function () {
     UserModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("User", this.schema);
     };
-    /*** should be deleted */
-    UserModel.prototype.retrieveAllUsers = function (response) {
-        var query = this.model.find({});
-        query.exec(function (err, userArray) {
-            response.json(userArray);
-        });
-    };
-    /*** should be deleted */
-    UserModel.prototype.retrieveUserCount = function (response) {
-        console.log("retrieve User Count ...");
-        var query = this.model.estimatedDocumentCount();
-        query.exec(function (err, numberOfUsers) {
-            console.log("numberOfUsers: " + numberOfUsers);
-            response.json(numberOfUsers);
-        });
-    };
     // retrieve info of a single user
     UserModel.prototype.retrieveASingleUser = function (response, filter) {
         var query = this.model.findOne(filter);
@@ -60,15 +44,7 @@ var UserModel = /** @class */ (function () {
                 console.log("Error of update: ");
                 console.log(err);
             }
-        });
-        // query to return json file of the updated document
-        var check_result_query = this.model.find(filter);
-        check_result_query.exec(function (err, updated_user) {
-            if (err) {
-                console.log("Error of confirm update: ");
-                console.log(err);
-            }
-            response.json(updated_user);
+            response.json(result);
         });
     };
     return UserModel;

@@ -17,7 +17,8 @@ var SubItemModel = /** @class */ (function () {
             addDate: Date,
             dueDate: Date,
             price: Number,
-            isArchived: Boolean
+            isArchived: Boolean,
+            subscriptionType: String
         }, { collection: "subscriptionItems" });
     };
     SubItemModel.prototype.createModel = function () {

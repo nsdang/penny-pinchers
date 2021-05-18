@@ -63,15 +63,15 @@ var SubListModel = /** @class */ (function () {
             response.json(lists);
         });
     };
-    // retrieve a single list
-    SubListModel.prototype.retrieveASingleList = function (response, filter) {
+    // retrieve a single list's info
+    SubListModel.prototype.retrieveListInfo = function (response, filter) {
         var query = this.model.findOne(filter);
         query.exec(function (err, list) {
             response.json(list);
         });
     };
-    // retrieve a single list
-    SubListModel.prototype.retrieveASingleListId = function (filter) {
+    // retrieve a single list ID given an object
+    SubListModel.prototype.retrieveListId = function (filter) {
         return __awaiter(this, void 0, void 0, function () {
             var query;
             return __generator(this, function (_a) {
@@ -82,6 +82,17 @@ var SubListModel = /** @class */ (function () {
                         });
                     })];
             });
+        });
+    };
+    // update list's info
+    SubListModel.prototype.updateListInfo = function (response, filter, reqBody) {
+        var query = this.model.findOneAndUpdate(filter, reqBody);
+        query.exec(function (err, result) {
+            if (err) {
+                console.log("Error of update: ");
+                console.log(err);
+            }
+            response.json(result);
         });
     };
     return SubListModel;

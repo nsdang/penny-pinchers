@@ -7,6 +7,7 @@ interface ISubItemModel extends Mongoose.Document {
     addDate: Date,
     dueDate: Date,
     price: Number,
-    isArchived: Boolean
+    isArchived: Boolean,
+    subscriptionType: String
 }
 export{ISubItemModel};
