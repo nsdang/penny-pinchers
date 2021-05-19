@@ -128,12 +128,30 @@ class App {
       console.log("Create a new user");
       console.log("Req.body: ", req.body);
       var jsonObj = req.body;
-      //jsonObj.userId = this.idGenerator;
+      var userId = jsonObj.userId;
+      var userName = jsonObj.fname;
+
       this.User.model.create([jsonObj], (err) => {
         if (err) {
           console.log("user creation failed");
         }
       });
+
+      // create a new list assigned to user
+      var listId = this.idGenerator;
+      var userJsonObj = {
+        "listId": listId,
+        name: userName + "'s List",
+        description: "",
+        userId: userId,
+      }
+
+      this.SubscriptionList.model.create([userJsonObj], (err) => {
+        if (err) {
+          console.log("user creation failed");
+        }
+      });
+
       res.send(this.idGenerator.toString());
       this.idGenerator++;
     });
