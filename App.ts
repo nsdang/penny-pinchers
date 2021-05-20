@@ -7,7 +7,7 @@ import * as bodyParser from "body-parser";
 //var MongoClient = require('mongodb').MongoClient;
 //var Q = require('q');
 
-import { SubListModel } from "./model/SubListModel";
+import { SubscriptionListModel } from "./model/SubscriptionListModel";
 import { SubscriptionItemModel } from "./model/SubscriptionItemModel";
 import { UserModel } from "./model/UserModel";
 
@@ -15,7 +15,7 @@ import { UserModel } from "./model/UserModel";
 class App {
   // ref to Express instance
   public expressApp: express.Application;
-  public SubscriptionList: SubListModel;
+  public SubscriptionList: SubscriptionListModel;
   public SubscriptionItem: SubscriptionItemModel;
   public User: UserModel;
   public idGenerator: number;
@@ -26,7 +26,7 @@ class App {
     this.middleware();
     this.routes();
     this.idGenerator = 102;
-    this.SubscriptionList = new SubListModel();
+    this.SubscriptionList = new SubscriptionListModel();
     this.SubscriptionItem = new SubscriptionItemModel();
     this.User = new UserModel();
   }

@@ -4,7 +4,7 @@ import { ISubscriptionListModel } from "../interfaces/ISubscriptionListModel";
 
 let mongooseConnection = DataAccess.mongooseConnection;
 
-class SubListModel {
+class SubscriptionListModel {
   public schema: any;
   public model: any;
 
@@ -70,4 +70,4 @@ class SubListModel {
     });
   }
 }
-export { SubListModel };
+export { SubscriptionListModel };
