@@ -8,7 +8,7 @@ import * as bodyParser from "body-parser";
 //var Q = require('q');
 
 import { SubListModel } from "./model/SubListModel";
-import { SubItemModel } from "./model/SubItemModel";
+import { SubscriptionItemModel } from "./model/SubscriptionItemModel";
 import { UserModel } from "./model/UserModel";
 
 // Creates and configures an ExpressJS web server.
@@ -16,7 +16,7 @@ class App {
   // ref to Express instance
   public expressApp: express.Application;
   public SubscriptionList: SubListModel;
-  public SubscriptionItem: SubItemModel;
+  public SubscriptionItem: SubscriptionItemModel;
   public User: UserModel;
   public idGenerator: number;
 
@@ -27,7 +27,7 @@ class App {
     this.routes();
     this.idGenerator = 102;
     this.SubscriptionList = new SubListModel();
-    this.SubscriptionItem = new SubItemModel();
+    this.SubscriptionItem = new SubscriptionItemModel();
     this.User = new UserModel();
   }
 

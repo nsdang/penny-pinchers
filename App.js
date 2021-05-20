@@ -10,7 +10,7 @@ var bodyParser = require("body-parser");
 //var MongoClient = require('mongodb').MongoClient;
 //var Q = require('q');
 var SubListModel_1 = require("./model/SubListModel");
-var SubItemModel_1 = require("./model/SubItemModel");
+var SubscriptionItemModel_1 = require("./model/SubscriptionItemModel");
 var UserModel_1 = require("./model/UserModel");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
@@ -21,7 +21,7 @@ var App = /** @class */ (function () {
         this.routes();
         this.idGenerator = 102;
         this.SubscriptionList = new SubListModel_1.SubListModel();
-        this.SubscriptionItem = new SubItemModel_1.SubItemModel();
+        this.SubscriptionItem = new SubscriptionItemModel_1.SubscriptionItemModel();
         this.User = new UserModel_1.UserModel();
     }
     // Configure Express middleware.
