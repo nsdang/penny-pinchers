@@ -1,6 +1,6 @@
 import Mongoose = require("mongoose");
 
-interface ISubItemModel extends Mongoose.Document {
+interface ISubscriptionItemModel extends Mongoose.Document {
     listId: Number,
     itemId: Number,
     serviceName: String,
@@ -10,4 +10,4 @@ interface ISubItemModel extends Mongoose.Document {
     isArchived: Boolean,
     subscriptionType: String
 }
-export{ISubItemModel};
+export{ISubscriptionItemModel};
