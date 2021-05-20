@@ -1,10 +1,10 @@
 import Mongoose = require("mongoose");
 
-interface ISubListModel extends Mongoose.Document {
+interface ISubscriptionListModel extends Mongoose.Document {
     listId : number;
     name: string;
     description: string;
     userId: number;
 }
 
-export{ISubListModel};
+export{ISubscriptionListModel};

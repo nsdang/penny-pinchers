@@ -1,6 +1,6 @@
 import Mongoose = require("mongoose");
 import { DataAccess } from "../DataAccess";
-import { ISubListModel } from "../interfaces/ISubListModel";
+import { ISubscriptionListModel } from "../interfaces/ISubscriptionListModel";
 
 let mongooseConnection = DataAccess.mongooseConnection;
 
@@ -26,7 +26,7 @@ class SubListModel {
   }
 
   public createModel(): void {
-    this.model = mongooseConnection.model<ISubListModel>(
+    this.model = mongooseConnection.model<ISubscriptionListModel>(
       "SubscriptionList",
       this.schema
     );
