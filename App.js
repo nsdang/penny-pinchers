@@ -26,6 +26,15 @@ var App = /** @class */ (function () {
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
+        this.expressApp.use(function (req, res, next) {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header('Access-Control-Allow-Headers', '*');
+            if (req.method === 'OPTIONS') {
+                res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+                return res.status(200).json({});
+            }
+            next();
+        });
         this.expressApp.use(logger("dev"));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));

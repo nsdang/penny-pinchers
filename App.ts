@@ -33,6 +33,15 @@ class App {
 
   // Configure Express middleware.
   private middleware(): void {
+    this.expressApp.use((req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Headers', '*');
+      if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        return res.status(200).json({});
+      }
+      next();
+    });
     this.expressApp.use(logger("dev"));
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
@@ -172,7 +181,6 @@ class App {
       console.log("Req.body: ", req.body);
       this.User.updateUserInfo(res, { userId: userId }, req.body);
     });
-
 
     this.expressApp.use("/", router);
 
