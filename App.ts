@@ -10,6 +10,7 @@ import * as bodyParser from "body-parser";
 import { SubscriptionListModel } from "./model/SubscriptionListModel";
 import { SubscriptionItemModel } from "./model/SubscriptionItemModel";
 import { UserModel } from "./model/UserModel";
+import { sendEmail } from "./utils/sendEmail.js";
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -34,10 +35,13 @@ class App {
   // Configure Express middleware.
   private middleware(): void {
     this.expressApp.use((req, res, next) => {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Headers', '*');
-      if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "*");
+      if (req.method === "OPTIONS") {
+        res.header(
+          "Access-Control-Allow-Methods",
+          "PUT, POST, PATCH, DELETE, GET"
+        );
         return res.status(200).json({});
       }
       next();
@@ -65,9 +69,12 @@ class App {
       console.log();
       var userid: number = +req.params.userId;
       console.log("Retrieve all items in the list with userId: ", userid);
-      this.SubscriptionList.retrieveListId({ userId: userid }).then((listId) => {
-        if(listId)  this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
-      });
+      this.SubscriptionList.retrieveListId({ userId: userid }).then(
+        (listId) => {
+          if (listId)
+            this.SubscriptionItem.retrieveAllItems(res, { listId: listId });
+        }
+      );
     });
 
     // get specific item based on itemId
@@ -109,7 +116,7 @@ class App {
     // delete an item
     router.delete("/app/item/:itemId/", (req, res) => {
       var itemId: number = +req.params.itemId;
-      this.SubscriptionItem.deleteItem(res, {itemId: itemId});
+      this.SubscriptionItem.deleteItem(res, { itemId: itemId });
     });
 
     /*********************************** LIST ***********************************/
@@ -149,11 +156,11 @@ class App {
       // create a new list assigned to user
       var listId = this.idGenerator;
       var userJsonObj = {
-        "listId": listId,
+        listId: listId,
         name: userName + "'s List",
         description: "",
         userId: userId,
-      }
+      };
 
       this.SubscriptionList.model.create([userJsonObj], (err) => {
         if (err) {
@@ -180,6 +187,15 @@ class App {
       console.log("Update information of a user with userId = ", userId);
       console.log("Req.body: ", req.body);
       this.User.updateUserInfo(res, { userId: userId }, req.body);
+    });
+
+    /************************************ REMINDER *********************************/
+    router.post("/app/sendemail/", (req, res) => {
+      var jsonObj = req.body;
+      console.log(jsonObj);
+
+      sendEmail({ subscription: jsonObj.subscription, client: jsonObj.client });
+      res.send("DOne");
     });
 
     this.expressApp.use("/", router);

@@ -12,6 +12,7 @@ var bodyParser = require("body-parser");
 var SubscriptionListModel_1 = require("./model/SubscriptionListModel");
 var SubscriptionItemModel_1 = require("./model/SubscriptionItemModel");
 var UserModel_1 = require("./model/UserModel");
+var sendEmail_js_1 = require("./utils/sendEmail.js");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
@@ -27,10 +28,10 @@ var App = /** @class */ (function () {
     // Configure Express middleware.
     App.prototype.middleware = function () {
         this.expressApp.use(function (req, res, next) {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', '*');
-            if (req.method === 'OPTIONS') {
-                res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "*");
+            if (req.method === "OPTIONS") {
+                res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
                 return res.status(200).json({});
             }
             next();
@@ -128,7 +129,7 @@ var App = /** @class */ (function () {
             // create a new list assigned to user
             var listId = _this.idGenerator;
             var userJsonObj = {
-                "listId": listId,
+                listId: listId,
                 name: userName + "'s List",
                 description: "",
                 userId: userId
@@ -155,6 +156,13 @@ var App = /** @class */ (function () {
             console.log("Update information of a user with userId = ", userId);
             console.log("Req.body: ", req.body);
             _this.User.updateUserInfo(res, { userId: userId }, req.body);
+        });
+        /************************************ REMINDER *********************************/
+        router.post("/app/sendemail/", function (req, res) {
+            var jsonObj = req.body;
+            console.log(jsonObj);
+            sendEmail_js_1.sendEmail({ subscription: jsonObj.subscription, client: jsonObj.client });
+            res.send("DOne");
         });
         this.expressApp.use("/", router);
         this.expressApp.use("/app/json/", express.static(__dirname + "/app/json"));
