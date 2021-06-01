@@ -25,6 +25,8 @@ class SubscriptionItemModel {
         price: Number,
         isArchived: Boolean,
         subscriptionType: String,
+        recurringOption: String,
+        reminderMethod: String,
       },
       { collection: "subscriptionItems" }
     );

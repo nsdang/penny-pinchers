@@ -8,6 +8,8 @@ interface ISubscriptionItemModel extends Mongoose.Document {
     dueDate: Date,
     price: Number,
     isArchived: Boolean,
-    subscriptionType: String
+    subscriptionType: String,
+    recurringOption: String;
+    reminderMethod: String;
 }
 export{ISubscriptionItemModel};

@@ -18,7 +18,9 @@ var SubscriptionItemModel = /** @class */ (function () {
             dueDate: Date,
             price: Number,
             isArchived: Boolean,
-            subscriptionType: String
+            subscriptionType: String,
+            recurringOption: String,
+            reminderMethod: String
         }, { collection: "subscriptionItems" });
     };
     SubscriptionItemModel.prototype.createModel = function () {
