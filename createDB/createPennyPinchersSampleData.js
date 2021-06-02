@@ -124,7 +124,7 @@ itemcollections.insert({
 
 itemcollections.insert({
         listId : 2,
-        itemId : 1, 
+        itemId : 3, 
         serviceName : "Netflix",
         addDate : 5/4/2021,
         dueDate : 6/4/2021,
@@ -136,7 +136,7 @@ itemcollections.insert({
 itemcollections.insert(
 {
     listId : 3,
-    itemId : 1, 
+    itemId : 4, 
     serviceName : "Crunchyroll",
     addDate : 5/4/2021,
     dueDate : 6/4/2021,
@@ -148,7 +148,7 @@ itemcollections.insert(
     itemcollections.insert(
     {
         listId : 4,
-        itemId : 1, 
+        itemId : 5, 
         serviceName : "Spotify Premium",
         addDate : 5/4/2021,
         dueDate : 6/4/2021,
