@@ -6,11 +6,14 @@ import * as logger from "morgan";
 import * as bodyParser from "body-parser";
 //var MongoClient = require('mongodb').MongoClient;
 //var Q = require('q');
+import * as passport from 'passport';
+import GooglePassport from './GooglePassport'
 
 import { SubscriptionListModel } from "./model/SubscriptionListModel";
 import { SubscriptionItemModel } from "./model/SubscriptionItemModel";
 import { UserModel } from "./model/UserModel";
 import { sendEmail } from "./utils/sendEmail.js";
+import { profile } from "node:console";
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -20,9 +23,11 @@ class App {
   public SubscriptionItem: SubscriptionItemModel;
   public User: UserModel;
   public idGenerator: number;
+  public googlePassportConfig:GooglePassport;
 
   //Run configuration methods on the Express instance.
   constructor() {
+    this.googlePassportConfig = new GooglePassport();
     this.expressApp = express();
     this.middleware();
     this.routes();
@@ -49,11 +54,29 @@ class App {
     this.expressApp.use(logger("dev"));
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
+    this.expressApp.use(passport.initialize());
   }
 
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
+
+    /********************************* Google OAuth ***************************/
+    
+    router.get('/auth/google',
+      passport.authenticate('google', { 
+        scope: ['profile'] 
+    }));
+
+    router.get('/auth/google/callback', 
+    passport.authenticate('google', 
+      { failureRedirect: '/' }
+    ),
+    (req, res) => {
+      console.log("User successfuly authenticated using google.");
+      // redirect to the right list
+    } 
+  );
 
     /********************************* ITEM ***********************************/
     // get all items using listId
@@ -199,7 +222,6 @@ class App {
     });
 
     this.expressApp.use("/", router);
-
     this.expressApp.use("/app/json/", express.static(__dirname + "/app/json"));
     this.expressApp.use("/images", express.static(__dirname + "/img"));
     this.expressApp.use("/", express.static(__dirname + "/angular-dist/dist/app"));

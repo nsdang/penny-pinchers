@@ -9,6 +9,8 @@ var logger = require("morgan");
 var bodyParser = require("body-parser");
 //var MongoClient = require('mongodb').MongoClient;
 //var Q = require('q');
+var passport = require("passport");
+var GooglePassport_1 = require("./GooglePassport");
 var SubscriptionListModel_1 = require("./model/SubscriptionListModel");
 var SubscriptionItemModel_1 = require("./model/SubscriptionItemModel");
 var UserModel_1 = require("./model/UserModel");
@@ -17,6 +19,7 @@ var sendEmail_js_1 = require("./utils/sendEmail.js");
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
     function App() {
+        this.googlePassportConfig = new GooglePassport_1["default"]();
         this.expressApp = express();
         this.middleware();
         this.routes();
@@ -39,11 +42,20 @@ var App = /** @class */ (function () {
         this.expressApp.use(logger("dev"));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
+        this.expressApp.use(passport.initialize());
     };
     // Configure API endpoints.
     App.prototype.routes = function () {
         var _this = this;
         var router = express.Router();
+        /********************************* Google OAuth ***************************/
+        router.get('/auth/google', passport.authenticate('google', {
+            scope: ['profile']
+        }));
+        router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), function (req, res) {
+            console.log("User successfuly authenticated using google.");
+            // redirect to the right list
+        });
         /********************************* ITEM ***********************************/
         // get all items using listId
         router.get("/app/item/list/:listId", function (req, res) {
