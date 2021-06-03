@@ -1,1 +1,10 @@
 sendgrid.env
+
+createDB/
+curlCommands/
+dbCommands/
+e2e/
+node_modules/
+docs/
+db/
+
