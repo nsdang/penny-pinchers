@@ -21,7 +21,7 @@ class SubscriptionListModel {
         description: String,
         userId: Number,
       },
-      { collection: "subscriptionList" }
+      { collection: "SubscriptionList" }
     );
   }
 

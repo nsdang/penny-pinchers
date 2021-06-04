@@ -51,7 +51,7 @@ var SubscriptionListModel = /** @class */ (function () {
             name: String,
             description: String,
             userId: Number
-        }, { collection: "subscriptionList" });
+        }, { collection: "SubscriptionList" });
     };
     SubscriptionListModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("SubscriptionList", this.schema);

@@ -21,10 +21,10 @@ var SubscriptionItemModel = /** @class */ (function () {
             subscriptionType: String,
             recurringOption: String,
             reminderMethod: String
-        }, { collection: "subscriptionItems" });
+        }, { collection: "SubscriptionItem" });
     };
     SubscriptionItemModel.prototype.createModel = function () {
-        this.model = mongooseConnection.model("SubscriptionItems", this.schema);
+        this.model = mongooseConnection.model("SubscriptionItem", this.schema);
     };
     // Get all items
     SubscriptionItemModel.prototype.retrieveAllItems = function (response, filter) {

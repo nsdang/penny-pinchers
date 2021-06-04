@@ -28,13 +28,13 @@ class SubscriptionItemModel {
         recurringOption: String,
         reminderMethod: String,
       },
-      { collection: "subscriptionItems" }
+      { collection: "SubscriptionItem" }
     );
   }
 
   public createModel(): void {
     this.model = mongooseConnection.model<ISubscriptionItemModel>(
-      "SubscriptionItems",
+      "SubscriptionItem",
       this.schema
     );
   }
