@@ -57,6 +57,15 @@ class App {
     this.expressApp.use(passport.initialize());
   }
 
+  // Check if user is already authenticated
+  private IsUserAuthenticated(req, res, next):void {
+    if(req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/"); 
+    }
+  }
+
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();

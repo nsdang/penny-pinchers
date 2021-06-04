@@ -44,6 +44,15 @@ var App = /** @class */ (function () {
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
         this.expressApp.use(passport.initialize());
     };
+    // Check if user is already authenticated
+    App.prototype.IsUserAuthenticated = function (req, res, next) {
+        if (req.isAuthenticated()) {
+            next();
+        }
+        else {
+            res.redirect("/");
+        }
+    };
     // Configure API endpoints.
     App.prototype.routes = function () {
         var _this = this;
