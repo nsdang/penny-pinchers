@@ -35,33 +35,24 @@ class UserModel {
         this.model = mongooseConnection.model<IUserModel>("User", this.schema);
     }
 
-    // retrieve info of a single user
-    public async retrieveASingleUser(filter: Object) : Promise<any> {
+    public retrieveASingleUser(response: any, filter: Object): any{
         var query = this.model.findOne(filter);
-        // await query.exec((err, user) => {      
-        //     if(user == null) {
-        //          console.log("Creating a new user");
-        //          return null; 
-        //     }
-        //      console.log("User already existed");
-        //      return user; 
-        // });
-        var user; 
-        const promise = new Promise((resolve, reject) => {
-            query.exec((err, user) => { 
-            })
+        query.exec((err, user) => { 
+            response.json(user);
+        });
+    }
 
-        }).then(() => {
-            if(user == null) {
-                console.log("Creating a new user");
-                 return null;
-            }
-
-            console.log("User already existed");
-            return user; 
-        })
-
-        return promise; 
+    // retrieve info of a single user
+    public checkIfUserExist(filter: Object) : any {
+        var query = this.model.findOne(filter);
+         return new Promise((resolve, reject) => {
+            query.exec((err, user) => {      
+                if(user == null) {
+                     resolve(null); 
+                }
+                 resolve(user); 
+            });
+         })
     }
 
     // modify info of a single user

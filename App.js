@@ -43,6 +43,7 @@ var App = /** @class */ (function () {
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
         this.expressApp.use(passport.initialize());
+        this.expressApp.use(passport.session());
     };
     // Check if user is already authenticated
     App.prototype.IsUserAuthenticated = function (req, res, next) {
@@ -58,13 +59,23 @@ var App = /** @class */ (function () {
         var _this = this;
         var router = express.Router();
         /********************************* Google OAuth ***************************/
-        router.get('/auth/google', passport.authenticate('google', {
+        // For login in with google
+        router.get("/auth/google", passport.authenticate('google', {
             scope: ['profile', 'email']
         }));
-        router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), function (req, res) {
+        // Callback function after logged in
+        router.get("/auth/google/callback", passport.authenticate('google', { failureRedirect: '/' }), function (req, res) {
             console.log("User successfuly authenticated using google.");
             // redirect to the right list
-            // console.log(req);
+            var currUser = req.user;
+            res.redirect("/app/item/user/" + currUser.userId);
+        });
+        // For logging out from google
+        router.get("/auth/logout", function (req, res) {
+            var request = req;
+            request.session = null;
+            request.logout();
+            res.redirect('/');
         });
         /********************************* ITEM ***********************************/
         // get all items using listId
@@ -169,7 +180,7 @@ var App = /** @class */ (function () {
             console.log();
             var userId = +req.params.userId;
             console.log("Retrieve info of a user with userId = ", userId);
-            _this.User.retrieveASingleUser({ userId: userId });
+            _this.User.retrieveASingleUser(res, { userId: userId });
         });
         // Modify a single user information based on userId
         router.put("/app/user/:userId", function (req, res) {

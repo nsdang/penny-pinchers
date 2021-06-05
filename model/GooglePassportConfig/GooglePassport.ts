@@ -25,51 +25,53 @@ class GooglePassport {
                 callbackURL: "/auth/google/callback"
             },
             async function(token, tokenSecret, profile, done) {
-                    var currentUser = User.retrieveASingleUser({userId : profile.id});
-                    await currentUser; 
+                        User.checkIfUserExist({userId : profile.id}).then((resolve) => {
+                        console.log(resolve);
+                        if(resolve != null) {
+                            console.log("user already exist");
+                            return done(null, resolve);
+    
+                        } else {
+                            console.log("creating a new user");
+                                // create a new user 
+                                /*var newUser = {
+                                    userId: profile.id,
+                                    fname: profile.givenName,
+                                    lname: profile.familyName,
+                                    email : profile.emails[0].value,
+                                    isPremium: false,
+                                }
+    
+                                User.model.create([newUser], (err) => {
+                                    if (err) {
+                                        console.log("user creation failed");
+                                    }
+                                });
+    
+                                // create a new list and assign to user
+                                var listId = this.idGenerator;
+                                var userList = {
+                                    listId : listId,
+                                    name: profile.givenName + "'s List",
+                                    description: "",
+                                    userId: profile.id,
+                                }
+    
+                                SubscriptionList.model.create([userList], (err) => {
+                                    if (err) {
+                                    console.log("user creation failed");
+                                    }
+                                });   
+    
+                                console.log("hello");*/
+                                //return done(null, profile);
+                        }
+                    })
+                    })
+            
                     //var currentUser; 
                     //async() => await User.retrieveASingleUser(currentUser, {userId : profile.id});
-                    console.log(currentUser);
-                    if(currentUser != null) {
-                        console.log("user already exist");
-                        return done(null, profile);
 
-                    } else {
-                        console.log("creating a new user");
-                            // create a new user 
-                            /*var newUser = {
-                                userId: profile.id,
-                                fname: profile.givenName,
-                                lname: profile.familyName,
-                                email : profile.emails[0].value,
-                                isPremium: false,
-                            }
-
-                            User.model.create([newUser], (err) => {
-                                if (err) {
-                                    console.log("user creation failed");
-                                }
-                            });
-
-                            // create a new list and assign to user
-                            var listId = this.idGenerator;
-                            var userList = {
-                                listId : listId,
-                                name: profile.givenName + "'s List",
-                                description: "",
-                                userId: profile.id,
-                            }
-
-                            SubscriptionList.model.create([userList], (err) => {
-                                if (err) {
-                                console.log("user creation failed");
-                                }
-                            });   
-
-                            console.log("hello");*/
-                            //return done(null, profile);
-                    }
-                })
 
                 
             //})

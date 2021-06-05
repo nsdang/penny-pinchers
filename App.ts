@@ -56,6 +56,7 @@ class App {
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
     this.expressApp.use(passport.initialize());
+    this.expressApp.use(passport.session());
   }
 
   // Check if user is already authenticated
@@ -73,21 +74,32 @@ class App {
 
     /********************************* Google OAuth ***************************/
     
-    router.get('/auth/google',
+    // For login in with google
+    router.get("/auth/google",
       passport.authenticate('google', { 
         scope: ['profile', 'email'] 
     }));
 
-    router.get('/auth/google/callback', 
+    // Callback function after logged in
+    router.get("/auth/google/callback", 
     passport.authenticate('google', 
       { failureRedirect: '/' }
     ),
     (req, res) => {
-      console.log("User successfuly authenticated using google.");
-      // redirect to the right list
-     // console.log(req);
-    } 
-  );
+        console.log("User successfuly authenticated using google.");
+        // redirect to the right list
+        var currUser = (<any>req).user;
+        res.redirect("/app/list/user" + currUser.userId);
+      } 
+    );
+
+    // For logging out from google
+    router.get("/auth/logout", (req, res) => {
+      var request = (<any>req);
+      request.session = null; 
+      request.logout();
+      res.redirect('/');
+    });
 
     /********************************* ITEM ***********************************/
     // get all items using listId
@@ -211,7 +223,7 @@ class App {
       console.log();
       var userId: number = +req.params.userId;
       console.log("Retrieve info of a user with userId = ", userId);
-      this.User.retrieveASingleUser({ userId: userId });
+      this.User.retrieveASingleUser(res, { userId: userId });
     });
 
     // Modify a single user information based on userId

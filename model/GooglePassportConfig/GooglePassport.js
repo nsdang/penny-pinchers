@@ -51,61 +51,55 @@ var GooglePassport = /** @class */ (function () {
             callbackURL: "/auth/google/callback"
         }, function (token, tokenSecret, profile, done) {
             return __awaiter(this, void 0, void 0, function () {
-                var currentUser;
                 return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            currentUser = User.retrieveASingleUser({ userId: profile.id });
-                            return [4 /*yield*/, currentUser];
-                        case 1:
-                            _a.sent();
-                            //var currentUser; 
-                            //async() => await User.retrieveASingleUser(currentUser, {userId : profile.id});
-                            console.log(currentUser);
-                            if (currentUser != null) {
-                                console.log("user already exist");
-                                return [2 /*return*/, done(null, profile)];
+                    User.checkIfUserExist({ userId: profile.id }).then(function (resolve) {
+                        console.log(resolve);
+                        if (resolve != null) {
+                            console.log("user already exist");
+                            return done(null, resolve);
+                        }
+                        else {
+                            console.log("creating a new user");
+                            // create a new user 
+                            /*var newUser = {
+                                userId: profile.id,
+                                fname: profile.givenName,
+                                lname: profile.familyName,
+                                email : profile.emails[0].value,
+                                isPremium: false,
                             }
-                            else {
-                                console.log("creating a new user");
-                                // create a new user 
-                                /*var newUser = {
-                                    userId: profile.id,
-                                    fname: profile.givenName,
-                                    lname: profile.familyName,
-                                    email : profile.emails[0].value,
-                                    isPremium: false,
-                                }
-    
-                                User.model.create([newUser], (err) => {
-                                    if (err) {
-                                        console.log("user creation failed");
-                                    }
-                                });
-    
-                                // create a new list and assign to user
-                                var listId = this.idGenerator;
-                                var userList = {
-                                    listId : listId,
-                                    name: profile.givenName + "'s List",
-                                    description: "",
-                                    userId: profile.id,
-                                }
-    
-                                SubscriptionList.model.create([userList], (err) => {
-                                    if (err) {
+
+                            User.model.create([newUser], (err) => {
+                                if (err) {
                                     console.log("user creation failed");
-                                    }
-                                });
-    
-                                console.log("hello");*/
-                                //return done(null, profile);
+                                }
+                            });
+
+                            // create a new list and assign to user
+                            var listId = this.idGenerator;
+                            var userList = {
+                                listId : listId,
+                                name: profile.givenName + "'s List",
+                                description: "",
+                                userId: profile.id,
                             }
-                            return [2 /*return*/];
-                    }
+
+                            SubscriptionList.model.create([userList], (err) => {
+                                if (err) {
+                                console.log("user creation failed");
+                                }
+                            });
+
+                            console.log("hello");*/
+                            //return done(null, profile);
+                        }
+                    });
+                    return [2 /*return*/];
                 });
             });
         })
+        //var currentUser; 
+        //async() => await User.retrieveASingleUser(currentUser, {userId : profile.id});
         //})
         );
         passport.serializeUser(function (user, done) {
