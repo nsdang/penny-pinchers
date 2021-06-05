@@ -1,14 +1,21 @@
 
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20-with-people-api').Strategy;
+import Keys from "./Keys"
 
 class GooglePassport {
 
+    clientID: string;
+    clientSecret: string;
     constructor(){
+
+        this.clientID = Keys.clientID;
+        this.clientSecret = Keys.clientSecret;
+
         passport.use(
             new GoogleStrategy({
-                clientID: "564003822012-0aco66ofiurr475kh7ss3u0qfhf0kfnq.apps.googleusercontent.com",
-                clientSecret: "RaGCyxyreeUJ-iCAme4DiRmC",
+                clientID: this.clientID,
+                clientSecret: this.clientSecret,
                 callbackURL: "/auth/google/callback"
             },
             function(req, token, tokenSecret, profile, done) {

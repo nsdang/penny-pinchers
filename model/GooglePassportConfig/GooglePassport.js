@@ -2,11 +2,14 @@
 exports.__esModule = true;
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20-with-people-api').Strategy;
+var Keys_1 = require("./Keys");
 var GooglePassport = /** @class */ (function () {
     function GooglePassport() {
+        this.clientID = Keys_1["default"].clientID;
+        this.clientSecret = Keys_1["default"].clientSecret;
         passport.use(new GoogleStrategy({
-            clientID: "564003822012-0aco66ofiurr475kh7ss3u0qfhf0kfnq.apps.googleusercontent.com",
-            clientSecret: "RaGCyxyreeUJ-iCAme4DiRmC",
+            clientID: this.clientID,
+            clientSecret: this.clientSecret,
             callbackURL: "/auth/google/callback"
         }, function (req, token, tokenSecret, profile, done) {
             //User.findOrCreate({ googleId: profile.id }, function (err, user) {

@@ -7,7 +7,7 @@ import * as bodyParser from "body-parser";
 //var MongoClient = require('mongodb').MongoClient;
 //var Q = require('q');
 import * as passport from 'passport';
-import GooglePassport from './GooglePassport'
+import GooglePassport from './model/GooglePassportConfig/GooglePassport'
 
 import { SubscriptionListModel } from "./model/SubscriptionListModel";
 import { SubscriptionItemModel } from "./model/SubscriptionItemModel";
