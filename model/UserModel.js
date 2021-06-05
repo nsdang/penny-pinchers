@@ -31,7 +31,12 @@ var UserModel = /** @class */ (function () {
     UserModel.prototype.retrieveASingleUser = function (response, filter) {
         var query = this.model.findOne(filter);
         query.exec(function (err, user) {
-            response.json(user);
+            if (user == null) {
+                console.log("Creating a new user");
+                return null;
+            }
+            console.log("User already existed");
+            return user;
         });
     };
     // modify info of a single user

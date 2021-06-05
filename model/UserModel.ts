@@ -39,7 +39,12 @@ class UserModel {
     public retrieveASingleUser(response: any, filter: Object) : any {
         var query = this.model.findOne(filter);
         query.exec((err, user) => {
-            response.json(user);
+            if(user == null) {
+                console.log("Creating a new user");
+                return null; 
+            }
+            console.log("User already existed");
+            return user; 
           });
     }
 

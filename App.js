@@ -20,13 +20,13 @@ var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
     function App() {
         this.User = new UserModel_1.UserModel();
-        this.googlePassportConfig = new GooglePassport_1["default"](this.User);
+        this.SubscriptionList = new SubscriptionListModel_1.SubscriptionListModel();
+        this.SubscriptionItem = new SubscriptionItemModel_1.SubscriptionItemModel();
+        this.googlePassportConfig = new GooglePassport_1["default"](this.User, this.SubscriptionList);
         this.expressApp = express();
         this.middleware();
         this.routes();
         this.idGenerator = 102;
-        this.SubscriptionList = new SubscriptionListModel_1.SubscriptionListModel();
-        this.SubscriptionItem = new SubscriptionItemModel_1.SubscriptionItemModel();
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
@@ -59,11 +59,12 @@ var App = /** @class */ (function () {
         var router = express.Router();
         /********************************* Google OAuth ***************************/
         router.get('/auth/google', passport.authenticate('google', {
-            scope: ['profile']
+            scope: ['profile', 'email']
         }));
         router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), function (req, res) {
             console.log("User successfuly authenticated using google.");
             // redirect to the right list
+            // console.log(req);
         });
         /********************************* ITEM ***********************************/
         // get all items using listId

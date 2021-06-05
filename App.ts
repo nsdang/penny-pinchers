@@ -28,13 +28,14 @@ class App {
   //Run configuration methods on the Express instance.
   constructor() {
     this.User = new UserModel();
-    this.googlePassportConfig = new GooglePassport(this.User);
+    this.SubscriptionList = new SubscriptionListModel();
+    this.SubscriptionItem = new SubscriptionItemModel();
+    this.googlePassportConfig = new GooglePassport(this.User, this.SubscriptionList);
     this.expressApp = express();
     this.middleware();
     this.routes();
     this.idGenerator = 102;
-    this.SubscriptionList = new SubscriptionListModel();
-    this.SubscriptionItem = new SubscriptionItemModel();
+
   }
 
   // Configure Express middleware.
@@ -74,7 +75,7 @@ class App {
     
     router.get('/auth/google',
       passport.authenticate('google', { 
-        scope: ['profile'] 
+        scope: ['profile', 'email'] 
     }));
 
     router.get('/auth/google/callback', 
@@ -84,6 +85,7 @@ class App {
     (req, res) => {
       console.log("User successfuly authenticated using google.");
       // redirect to the right list
+     // console.log(req);
     } 
   );
 
