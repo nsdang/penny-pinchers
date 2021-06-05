@@ -1,16 +1,19 @@
-
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20-with-people-api').Strategy;
 import Keys from "./Keys"
+import {UserModel} from "../UserModel"
 
 class GooglePassport {
 
     clientID: string;
     clientSecret: string;
-    constructor(){
+    model: UserModel;
+
+    constructor(model: UserModel){
 
         this.clientID = Keys.clientID;
         this.clientSecret = Keys.clientSecret;
+        this.model = model;
 
         passport.use(
             new GoogleStrategy({
@@ -20,6 +23,8 @@ class GooglePassport {
             },
             function(req, token, tokenSecret, profile, done) {
                 //User.findOrCreate({ googleId: profile.id }, function (err, user) {
+                // create a new user
+                
                 console.log(profile);
                 return done(null, profile);
             }
@@ -32,8 +37,9 @@ class GooglePassport {
           passport.deserializeUser(function(user, done) {
             done(null, user);
           });
-    }
+    } 
   
 } export default GooglePassport;
+
 
 

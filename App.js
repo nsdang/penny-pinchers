@@ -19,14 +19,14 @@ var sendEmail_js_1 = require("./utils/sendEmail.js");
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
     function App() {
-        this.googlePassportConfig = new GooglePassport_1["default"]();
+        this.User = new UserModel_1.UserModel();
+        this.googlePassportConfig = new GooglePassport_1["default"](this.User);
         this.expressApp = express();
         this.middleware();
         this.routes();
         this.idGenerator = 102;
         this.SubscriptionList = new SubscriptionListModel_1.SubscriptionListModel();
         this.SubscriptionItem = new SubscriptionItemModel_1.SubscriptionItemModel();
-        this.User = new UserModel_1.UserModel();
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {

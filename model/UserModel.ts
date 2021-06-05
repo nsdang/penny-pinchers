@@ -17,8 +17,7 @@ class UserModel {
     public createSchema(): void {
         this.schema = new Mongoose.Schema(
             {
-                ssoId: {type: String, required: true, unique: true},
-                userId : {type: Number, required: true, unique: true},
+                userId : {type: String, required: true, unique: true},
                 fname: String,
                 lname: String,
                 creditcardInfo:{

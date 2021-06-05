@@ -27,14 +27,14 @@ class App {
 
   //Run configuration methods on the Express instance.
   constructor() {
-    this.googlePassportConfig = new GooglePassport();
+    this.User = new UserModel();
+    this.googlePassportConfig = new GooglePassport(this.User);
     this.expressApp = express();
     this.middleware();
     this.routes();
     this.idGenerator = 102;
     this.SubscriptionList = new SubscriptionListModel();
     this.SubscriptionItem = new SubscriptionItemModel();
-    this.User = new UserModel();
   }
 
   // Configure Express middleware.
