@@ -169,7 +169,7 @@ var App = /** @class */ (function () {
             console.log();
             var userId = +req.params.userId;
             console.log("Retrieve info of a user with userId = ", userId);
-            _this.User.retrieveASingleUser(res, { userId: userId });
+            _this.User.retrieveASingleUser({ userId: userId });
         });
         // Modify a single user information based on userId
         router.put("/app/user/:userId", function (req, res) {

@@ -36,16 +36,32 @@ class UserModel {
     }
 
     // retrieve info of a single user
-    public retrieveASingleUser(response: any, filter: Object) : any {
+    public async retrieveASingleUser(filter: Object) : Promise<any> {
         var query = this.model.findOne(filter);
-        query.exec((err, user) => {
+        // await query.exec((err, user) => {      
+        //     if(user == null) {
+        //          console.log("Creating a new user");
+        //          return null; 
+        //     }
+        //      console.log("User already existed");
+        //      return user; 
+        // });
+        var user; 
+        const promise = new Promise((resolve, reject) => {
+            query.exec((err, user) => { 
+            })
+
+        }).then(() => {
             if(user == null) {
                 console.log("Creating a new user");
-                return null; 
+                 return null;
             }
+
             console.log("User already existed");
             return user; 
-          });
+        })
+
+        return promise; 
     }
 
     // modify info of a single user

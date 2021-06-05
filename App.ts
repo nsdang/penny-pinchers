@@ -211,7 +211,7 @@ class App {
       console.log();
       var userId: number = +req.params.userId;
       console.log("Retrieve info of a user with userId = ", userId);
-      this.User.retrieveASingleUser(res, { userId: userId });
+      this.User.retrieveASingleUser({ userId: userId });
     });
 
     // Modify a single user information based on userId
