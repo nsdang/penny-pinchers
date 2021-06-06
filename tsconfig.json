@@ -7,7 +7,7 @@
     "src/**/*.ts",
     "*.ts",
     "**/*.ts"
-  ],
+, "utils/recurCheckPayDay.js"  ],
   "exclude": [
     "node_modules"
   ]

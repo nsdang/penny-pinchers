@@ -14,7 +14,7 @@ var GooglePassport_1 = require("./model/GooglePassportConfig/GooglePassport");
 var SubscriptionListModel_1 = require("./model/SubscriptionListModel");
 var SubscriptionItemModel_1 = require("./model/SubscriptionItemModel");
 var UserModel_1 = require("./model/UserModel");
-var sendEmail_js_1 = require("./utils/sendEmail.js");
+var sendEmail_1 = require("./utils/sendEmail");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
@@ -197,7 +197,7 @@ var App = /** @class */ (function () {
         router.post("/app/sendemail/", function (req, res) {
             var jsonObj = req.body;
             console.log(jsonObj);
-            sendEmail_js_1.sendEmail({ subscription: jsonObj.subscription, client: jsonObj.client });
+            sendEmail_1.sendEmail({ subscription: jsonObj.subscription, client: jsonObj.client });
             res.send("DOne");
         });
         this.expressApp.use("/", router);

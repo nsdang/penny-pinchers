@@ -12,7 +12,7 @@ import GooglePassport from './model/GooglePassportConfig/GooglePassport'
 import { SubscriptionListModel } from "./model/SubscriptionListModel";
 import { SubscriptionItemModel } from "./model/SubscriptionItemModel";
 import { UserModel } from "./model/UserModel";
-import { sendEmail } from "./utils/sendEmail.js";
+import { sendEmail } from "./utils/sendEmail";
 import { profile } from "node:console";
 
 // Creates and configures an ExpressJS web server.

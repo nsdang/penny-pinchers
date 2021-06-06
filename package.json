@@ -27,6 +27,7 @@
     "mongodb": "^2.2.25",
     "mongoose": "^5.0.17",
     "morgan": "^1.10.0",
+    "node-cron": "^3.0.0",
     "passport": "^0.4.1",
     "passport-google-oauth20-with-people-api": "^2.0.0",
     "path": "^0.12.7",
