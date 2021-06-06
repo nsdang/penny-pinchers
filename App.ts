@@ -114,7 +114,7 @@ class App {
     });
 
     // get all items using userId
-    router.get("/app/item/user/:userId", this.IsUserAuthenticated, (req, res) => {
+    router.get("/app/item/user/:userId", (req, res) => {
       console.log();
       var userid: number = +req.params.userId;
       console.log("Retrieve all items in the list with userId: ", userid);

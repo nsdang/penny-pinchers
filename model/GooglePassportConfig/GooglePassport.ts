@@ -32,6 +32,7 @@ class GooglePassport {
     
                     } else {
                         console.log("creating a new user");
+               
                         // create a new user 
                         var newUser = {
                             userId: profile.id,
@@ -48,22 +49,26 @@ class GooglePassport {
                         });
     
                         // create a new list and assign to user
-                        var listId = this.idGenerator;
-                        var userList = {
-                            listId : listId,
-                            name: profile.givenName + "'s List",
-                            description: "",
-                            userId: profile.id,
-                        }
-    
-                        SubscriptionList.model.create([userList], (err) => {
-                            if (err) {
-                                console.log("user creation failed");
+                        SubscriptionList.getLastListId().then((resolve) => {
+                            var listID = resolve += 1;
+                            console.log(listID);
+                            var userList = {
+                                listId : listID,
+                                name: profile.givenName + "'s List",
+                                description: "",
+                                userId: profile.id,
                             }
-                        });   
+
+                            SubscriptionList.model.create([userList], (err) => {
+                                if (err) {
+                                    console.log("user creation failed");
+                                }
+                            });   
+                        });
     
                         return done(null, newUser);
                         }
+                
                     })
                 })
             );

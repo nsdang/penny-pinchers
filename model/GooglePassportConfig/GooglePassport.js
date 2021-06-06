@@ -51,7 +51,6 @@ var GooglePassport = /** @class */ (function () {
             callbackURL: "/auth/google/callback"
         }, function (token, tokenSecret, profile, done) {
             return __awaiter(this, void 0, void 0, function () {
-                var _this = this;
                 return __generator(this, function (_a) {
                     User.checkIfUserExist({ userId: profile.id }).then(function (resolve) {
                         if (resolve != null) {
@@ -74,17 +73,20 @@ var GooglePassport = /** @class */ (function () {
                                 }
                             });
                             // create a new list and assign to user
-                            var listId = _this.idGenerator;
-                            var userList = {
-                                listId: listId,
-                                name: profile.givenName + "'s List",
-                                description: "",
-                                userId: profile.id
-                            };
-                            SubscriptionList.model.create([userList], function (err) {
-                                if (err) {
-                                    console.log("user creation failed");
-                                }
+                            SubscriptionList.getLastListId().then(function (resolve) {
+                                var listID = resolve += 1;
+                                console.log(listID);
+                                var userList = {
+                                    listId: listID,
+                                    name: profile.givenName + "'s List",
+                                    description: "",
+                                    userId: profile.id
+                                };
+                                SubscriptionList.model.create([userList], function (err) {
+                                    if (err) {
+                                        console.log("user creation failed");
+                                    }
+                                });
                             });
                             return done(null, newUser);
                         }

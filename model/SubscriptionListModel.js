@@ -56,6 +56,15 @@ var SubscriptionListModel = /** @class */ (function () {
     SubscriptionListModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("SubscriptionList", this.schema);
     };
+    // retrieve last user's listId
+    SubscriptionListModel.prototype.getLastListId = function () {
+        var query = this.model.findOne().sort({ listId: 'descending' });
+        return new Promise(function (resolve, reject) {
+            query.exec(function (err, list) {
+                resolve(list.listId);
+            });
+        });
+    };
     // retrieve all lists
     SubscriptionListModel.prototype.retrieveAllLists = function (response) {
         var query = this.model.find({});

@@ -32,6 +32,15 @@ class SubscriptionListModel {
     );
   }
 
+   // retrieve last user's listId
+   public getLastListId() : any {
+    var query = this.model.findOne().sort({listId : 'descending'});
+    return new Promise((resolve, reject) => {
+        query.exec((err, list) => {      
+           resolve(list.listId);
+        });
+     })
+  }
   // retrieve all lists
   public retrieveAllLists(response: any) {
     var query = this.model.find({});
