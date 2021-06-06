@@ -25,57 +25,56 @@ class GooglePassport {
                 callbackURL: "/auth/google/callback"
             },
             async function(token, tokenSecret, profile, done) {
-                        User.checkIfUserExist({userId : profile.id}).then((resolve) => {
-                        console.log(resolve);
-                        if(resolve != null) {
-                            console.log("user already exist");
-                            return done(null, resolve);
+                User.checkIfUserExist({userId : profile.id}).then((resolve) => {
+                    if(resolve != null) {
+                        console.log("user already exist");
+                        return done(null, resolve);
     
-                        } else {
-                            console.log("creating a new user");
-                                // create a new user 
-                                var newUser = {
-                                    userId: profile.id,
-                                    fname: profile.givenName,
-                                    lname: profile.familyName,
-                                    email : profile.emails[0].value,
-                                    isPremium: false,
-                                }
+                    } else {
+                        console.log("creating a new user");
+                        // create a new user 
+                        var newUser = {
+                            userId: profile.id,
+                            fname: profile.givenName,
+                            lname: profile.familyName,
+                            email : profile.emails[0].value,
+                            isPremium: false,
+                        }
     
-                                User.model.create([newUser], (err) => {
-                                    if (err) {
-                                        console.log("user creation failed");
-                                    }
-                                });
+                        User.model.create([newUser], (err) => {
+                            if (err) {
+                                console.log("user creation failed");
+                            }
+                        });
     
-                                // create a new list and assign to user
-                                var listId = this.idGenerator;
-                                var userList = {
-                                    listId : listId,
-                                    name: profile.givenName + "'s List",
-                                    description: "",
-                                    userId: profile.id,
-                                }
+                        // create a new list and assign to user
+                        var listId = this.idGenerator;
+                        var userList = {
+                            listId : listId,
+                            name: profile.givenName + "'s List",
+                            description: "",
+                            userId: profile.id,
+                        }
     
-                                SubscriptionList.model.create([userList], (err) => {
-                                    if (err) {
-                                    console.log("user creation failed");
-                                    }
-                                });   
+                        SubscriptionList.model.create([userList], (err) => {
+                            if (err) {
+                                console.log("user creation failed");
+                            }
+                        });   
     
-                                return done(null, newUser);
+                        return done(null, newUser);
                         }
                     })
-                    })
-        );
+                })
+            );
 
-        passport.serializeUser(function(user, done) {
-            done(null, user);
-          });
+            passport.serializeUser(function(user, done) {
+                done(null, user);
+            });
           
-          passport.deserializeUser(function(user, done) {
-            done(null, user);
-          });
+            passport.deserializeUser(function(user, done) {
+                done(null, user);
+            });
     } 
   
 } export default GooglePassport;

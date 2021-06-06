@@ -48,9 +48,11 @@ var App = /** @class */ (function () {
     // Check if user is already authenticated
     App.prototype.IsUserAuthenticated = function (req, res, next) {
         if (req.isAuthenticated()) {
-            next();
+            console.log("User is already authenticated");
+            return next();
         }
         else {
+            console.log("User is not yet authenticated");
             res.redirect("/");
         }
     };
