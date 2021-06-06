@@ -68,7 +68,7 @@ var App = /** @class */ (function () {
             console.log("User successfuly authenticated using google.");
             // redirect to the right list
             var currUser = req.user;
-            //res.redirect("/app/list/user" + currUser.userId);
+            console.log(currUser.userId);
             res.redirect("/#/subscriptions/" + currUser.userId);
         });
         // For logging out from google
@@ -87,7 +87,7 @@ var App = /** @class */ (function () {
             _this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
         });
         // get all items using userId
-        router.get("/app/item/user/:userId", function (req, res) {
+        router.get("/app/item/user/:userId", this.IsUserAuthenticated, function (req, res) {
             console.log();
             var userid = +req.params.userId;
             console.log("Retrieve all items in the list with userId: ", userid);

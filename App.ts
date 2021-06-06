@@ -89,6 +89,7 @@ class App {
         console.log("User successfuly authenticated using google.");
         // redirect to the right list
         var currUser = (<any>req).user;
+        console.log(currUser.userId);
         res.redirect("/#/subscriptions/" + currUser.userId);
       } 
     );

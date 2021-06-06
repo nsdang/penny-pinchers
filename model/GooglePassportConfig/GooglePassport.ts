@@ -63,8 +63,7 @@ class GooglePassport {
                                     }
                                 });   
     
-                                console.log("hello");
-                                return done(null, profile);
+                                return done(null, newUser);
                         }
                     })
                     })
