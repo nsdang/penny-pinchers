@@ -27,12 +27,9 @@ class GooglePassport {
             async function(token, tokenSecret, profile, done) {
                 User.checkIfUserExist({userId : profile.id}).then((resolve) => {
                     if(resolve != null) {
-                        console.log("user already exist");
                         return done(null, resolve);
     
-                    } else {
-                        console.log("creating a new user");
-               
+                    } else {               
                         // create a new user 
                         var newUser = {
                             userId: profile.id,

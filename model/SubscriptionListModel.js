@@ -50,7 +50,7 @@ var SubscriptionListModel = /** @class */ (function () {
             listId: Number,
             name: String,
             description: String,
-            userId: Number
+            userId: String
         }, { collection: "SubscriptionList" });
     };
     SubscriptionListModel.prototype.createModel = function () {

@@ -54,11 +54,9 @@ var GooglePassport = /** @class */ (function () {
                 return __generator(this, function (_a) {
                     User.checkIfUserExist({ userId: profile.id }).then(function (resolve) {
                         if (resolve != null) {
-                            console.log("user already exist");
                             return done(null, resolve);
                         }
                         else {
-                            console.log("creating a new user");
                             // create a new user 
                             var newUser = {
                                 userId: profile.id,
