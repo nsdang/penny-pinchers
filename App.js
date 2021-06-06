@@ -68,7 +68,8 @@ var App = /** @class */ (function () {
             console.log("User successfuly authenticated using google.");
             // redirect to the right list
             var currUser = req.user;
-            res.redirect("/app/item/user/" + currUser.userId);
+            //res.redirect("/app/list/user" + currUser.userId);
+            res.redirect("/#/subscriptions/" + currUser.userId);
         });
         // For logging out from google
         router.get("/auth/logout", function (req, res) {
