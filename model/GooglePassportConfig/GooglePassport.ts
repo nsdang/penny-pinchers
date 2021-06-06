@@ -34,7 +34,7 @@ class GooglePassport {
                         } else {
                             console.log("creating a new user");
                                 // create a new user 
-                                /*var newUser = {
+                                var newUser = {
                                     userId: profile.id,
                                     fname: profile.givenName,
                                     lname: profile.familyName,
@@ -63,18 +63,11 @@ class GooglePassport {
                                     }
                                 });   
     
-                                console.log("hello");*/
-                                //return done(null, profile);
+                                console.log("hello");
+                                return done(null, profile);
                         }
                     })
                     })
-            
-                    //var currentUser; 
-                    //async() => await User.retrieveASingleUser(currentUser, {userId : profile.id});
-
-
-                
-            //})
         );
 
         passport.serializeUser(function(user, done) {
