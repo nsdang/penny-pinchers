@@ -71,7 +71,6 @@ class App {
     this.expressApp.use(cookieParser());
     this.expressApp.use(passport.initialize());
     this.expressApp.use(passport.session());
-    this.expressApp.use(cors({origin: 'https://pennypinchers.azurewebsites.net/', credentials : true}));
   }
 
   // Check if user is already authenticated
