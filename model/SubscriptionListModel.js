@@ -79,6 +79,17 @@ var SubscriptionListModel = /** @class */ (function () {
             response.json(list);
         });
     };
+    // return a single list based on listId
+    SubscriptionListModel.prototype.returnOwnerId = function (filter) {
+        var query = this.model.findOne(filter);
+        query.exec(function (err, list) {
+            return new Promise(function (resolve, reject) {
+                query.exec(function (err, list) {
+                    resolve(list.userId);
+                });
+            });
+        });
+    };
     // retrieve a single list ID given an object
     SubscriptionListModel.prototype.retrieveListId = function (filter) {
         return __awaiter(this, void 0, void 0, function () {

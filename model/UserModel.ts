@@ -42,6 +42,18 @@ class UserModel {
         });
     }
 
+    public returnUserInfo(filter: Object): any{
+        var query = this.model.findOne(filter);
+        return new Promise<any>((resolve, reject) => {
+            query.exec((err, user) => {
+              if (err){
+                reject(new Error('failed to fetch user'));
+              }
+              resolve(user);
+            });
+          });
+    }
+
     // retrieve info of a single user
     public checkIfUserExist(filter: Object) : any {
         var query = this.model.findOne(filter);
