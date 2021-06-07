@@ -33,6 +33,17 @@ var UserModel = /** @class */ (function () {
             response.json(user);
         });
     };
+    UserModel.prototype.returnUserInfo = function (filter) {
+        var query = this.model.findOne(filter);
+        return new Promise(function (resolve, reject) {
+            query.exec(function (err, user) {
+                if (err) {
+                    reject(new Error('failed to fetch user'));
+                }
+                resolve(user);
+            });
+        });
+    };
     // retrieve info of a single user
     UserModel.prototype.checkIfUserExist = function (filter) {
         var query = this.model.findOne(filter);

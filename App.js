@@ -30,7 +30,7 @@ var App = /** @class */ (function () {
         this.middleware();
         this.routes();
         this.idGenerator = 102;
-        this.EmailReminder.recurCheckPayDay(this.SubscriptionItem);
+        this.EmailReminder.recurCheckPayDay(this.User, this.SubscriptionList, this.SubscriptionItem);
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {

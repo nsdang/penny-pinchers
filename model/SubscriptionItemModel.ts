@@ -48,11 +48,10 @@ class SubscriptionItemModel {
   }
 
   // Return all items in database
-  public returnAllItems(): any {
-    var query = this.model.find();
+  public returnAllItems(filter: Object): any {
+    var query = this.model.find(filter);
     return new Promise<any>((resolve, reject) => {
       query.exec((err, items) => {
-        console.log("in reutnrAllItems", items);
         if (err){
           reject(new Error('failed to fetch all items'));
         }

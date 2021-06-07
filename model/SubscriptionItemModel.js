@@ -34,11 +34,10 @@ var SubscriptionItemModel = /** @class */ (function () {
         });
     };
     // Return all items in database
-    SubscriptionItemModel.prototype.returnAllItems = function () {
-        var query = this.model.find();
+    SubscriptionItemModel.prototype.returnAllItems = function (filter) {
+        var query = this.model.find(filter);
         return new Promise(function (resolve, reject) {
             query.exec(function (err, items) {
-                console.log("in reutnrAllItems", items);
                 if (err) {
                     reject(new Error('failed to fetch all items'));
                 }

@@ -57,6 +57,18 @@ class SubscriptionListModel {
     });
   }
 
+  // return a single list based on listId
+  public returnOwnerId(filter: Object): any {
+    var query = this.model.findOne(filter);
+    query.exec((err, list) => {
+      return new Promise<any>((resolve, reject) => {
+        query.exec((err, list) => {
+          resolve(list.userId);
+        });
+      }); 
+    })
+  }
+
   // retrieve a single list ID given an object
   public async retrieveListId(filter: Object): Promise<any> {
     var query = this.model.findOne(filter);
