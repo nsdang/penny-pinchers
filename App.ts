@@ -48,7 +48,7 @@ class App {
   // Configure Express middleware.
   private middleware(): void {
     this.expressApp.use((req, res, next) => {
-      res.header("Access-Control-Allow-Origin", "https://pennypinchers.azurewebsites.net/");
+      res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "*");
       if (req.method === "OPTIONS") {
         res.header(
@@ -78,7 +78,7 @@ class App {
     console.log("hello");
     if(req.isAuthenticated()) {
       console.log("User is already authenticated");
-      return next();
+      next();
     } 
     console.log("User is not yet authenticated");
     res.redirect("/"); 
@@ -129,7 +129,7 @@ class App {
     });
 
     // get all items using userId
-    router.get("/app/item/user/:userId", this.IsUserAuthenticated, (req, res) => {
+    router.get("/app/item/user/:userId", (req, res) => {
       console.log();
       var userid = req.params.userId;
       console.log("Retrieve all items in the list with userId: ", userid);
