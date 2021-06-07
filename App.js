@@ -34,15 +34,18 @@ var App = /** @class */ (function () {
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
-        this.expressApp.use(function (req, res, next) {
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Headers", "*");
-            if (req.method === "OPTIONS") {
-                res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-                return res.status(200).json({});
-            }
-            next();
-        });
+        // this.expressApp.use((req, res, next) => {
+        //   res.header("Access-Control-Allow-Origin", "*");
+        //   res.header("Access-Control-Allow-Headers", "*");
+        //   if (req.method === "OPTIONS") {
+        //     res.header(
+        //       "Access-Control-Allow-Methods",
+        //       "PUT, POST, PATCH, DELETE, GET"
+        //     );
+        //     return res.status(200).json({});
+        //   }
+        //   next();
+        // });
         this.expressApp.use(logger("dev"));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
@@ -56,10 +59,9 @@ var App = /** @class */ (function () {
     };
     // Check if user is already authenticated
     App.prototype.IsUserAuthenticated = function (req, res, next) {
-        console.log("hello");
         if (req.isAuthenticated()) {
             console.log("User is already authenticated");
-            next();
+            return next();
         }
         console.log("User is not yet authenticated");
         res.redirect("/");
@@ -97,7 +99,7 @@ var App = /** @class */ (function () {
             _this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
         });
         // get all items using userId
-        router.get("/app/item/user/:userId", function (req, res) {
+        router.get("/app/item/user/:userId", this.IsUserAuthenticated, function (req, res) {
             console.log();
             var userid = req.params.userId;
             console.log("Retrieve all items in the list with userId: ", userid);

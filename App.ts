@@ -47,18 +47,18 @@ class App {
 
   // Configure Express middleware.
   private middleware(): void {
-    this.expressApp.use((req, res, next) => {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "*");
-      if (req.method === "OPTIONS") {
-        res.header(
-          "Access-Control-Allow-Methods",
-          "PUT, POST, PATCH, DELETE, GET"
-        );
-        return res.status(200).json({});
-      }
-      next();
-    });
+    // this.expressApp.use((req, res, next) => {
+    //   res.header("Access-Control-Allow-Origin", "*");
+    //   res.header("Access-Control-Allow-Headers", "*");
+    //   if (req.method === "OPTIONS") {
+    //     res.header(
+    //       "Access-Control-Allow-Methods",
+    //       "PUT, POST, PATCH, DELETE, GET"
+    //     );
+    //     return res.status(200).json({});
+    //   }
+    //   next();
+    // });
     this.expressApp.use(logger("dev"));
     this.expressApp.use(bodyParser.json());
    
@@ -75,10 +75,9 @@ class App {
 
   // Check if user is already authenticated
   private IsUserAuthenticated(req, res, next):void {
-    console.log("hello");
     if(req.isAuthenticated()) {
       console.log("User is already authenticated");
-      next();
+      return next();
     } 
     console.log("User is not yet authenticated");
     res.redirect("/"); 
@@ -129,7 +128,7 @@ class App {
     });
 
     // get all items using userId
-    router.get("/app/item/user/:userId", (req, res) => {
+    router.get("/app/item/user/:userId", this.IsUserAuthenticated, (req, res) => {
       console.log();
       var userid = req.params.userId;
       console.log("Retrieve all items in the list with userId: ", userid);
