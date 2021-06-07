@@ -17,6 +17,7 @@ var SubscriptionListModel_1 = require("./model/SubscriptionListModel");
 var SubscriptionItemModel_1 = require("./model/SubscriptionItemModel");
 var UserModel_1 = require("./model/UserModel");
 var EmailReminder = require("./utils/recurCheckPayDay.js");
+var cors = require("cors");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
@@ -53,6 +54,7 @@ var App = /** @class */ (function () {
         this.expressApp.use(cookieParser());
         this.expressApp.use(passport.initialize());
         this.expressApp.use(passport.session());
+        this.expressApp.use(cors({ origin: 'https://pennypinchers.azurewebsites.net/', credentials: true }));
     };
     // Check if user is already authenticated
     App.prototype.IsUserAuthenticated = function (req, res, next) {

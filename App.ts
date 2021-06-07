@@ -16,7 +16,7 @@ import { SubscriptionItemModel } from "./model/SubscriptionItemModel";
 import { UserModel } from "./model/UserModel";
 import { profile } from "node:console";
 import * as EmailReminder from "./utils/recurCheckPayDay.js";
-import Keys from "./model/GooglePassportConfig/Keys"
+import * as cors from "cors";
 
 
 // Creates and configures an ExpressJS web server.
@@ -71,6 +71,7 @@ class App {
     this.expressApp.use(cookieParser());
     this.expressApp.use(passport.initialize());
     this.expressApp.use(passport.session());
+    this.expressApp.use(cors({origin: 'https://pennypinchers.azurewebsites.net/', credentials : true}));
   }
 
   // Check if user is already authenticated
