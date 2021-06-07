@@ -82,7 +82,7 @@ var App = /** @class */ (function () {
         });
         /********************************* ITEM ***********************************/
         // get all items using listId
-        router.get("/app/item/list/:listId", this.IsUserAuthenticated, function (req, res) {
+        router.get("/app/item/list/:listId", function (req, res) {
             console.log();
             var listid = +req.params.listId;
             console.log("Retrieve all items in the list with listId: ", listid);
@@ -125,7 +125,7 @@ var App = /** @class */ (function () {
             });
         });
         // update existed item
-        router.put("/app/item/:itemId", this.IsUserAuthenticated, function (req, res) {
+        router.put("/app/item/:itemId", function (req, res) {
             var itemID = +req.params.itemId;
             var conditionDetail = { itemId: itemID };
             var updateDetail = req.body;
@@ -133,20 +133,20 @@ var App = /** @class */ (function () {
             _this.SubscriptionItem.updateItemDetails(res, conditionDetail, updateDetail);
         });
         // delete an item
-        router["delete"]("/app/item/:itemId/", this.IsUserAuthenticated, function (req, res) {
+        router["delete"]("/app/item/:itemId/", function (req, res) {
             var itemId = +req.params.itemId;
             _this.SubscriptionItem.deleteItem(res, { itemId: itemId });
         });
         /*********************************** LIST ***********************************/
         // Retrieve a list's information (not including items) by userId
-        router.get("/app/list/user/:userId", this.IsUserAuthenticated, function (req, res) {
+        router.get("/app/list/user/:userId", function (req, res) {
             console.log();
             var userId = +req.params.userId;
             console.log("Retrieve a single list by userId: ", userId);
             _this.SubscriptionList.retrieveListInfo(res, { userId: userId });
         });
         // Modify a list by userId
-        router.put("/app/list/user/:userId", this.IsUserAuthenticated, function (req, res) {
+        router.put("/app/list/user/:userId", function (req, res) {
             console.log();
             var userid = +req.params.userId;
             console.log("Update list's information with userId = ", userid);
@@ -184,14 +184,14 @@ var App = /** @class */ (function () {
         //   this.idGenerator++;
         // });
         // Retrieve a single user by userId
-        router.get("/app/user/:userId", this.IsUserAuthenticated, function (req, res) {
+        router.get("/app/user/:userId", function (req, res) {
             console.log();
             var userId = +req.params.userId;
             console.log("Retrieve info of a user with userId = ", userId);
             _this.User.retrieveASingleUser(res, { userId: userId });
         });
         // Modify a single user information based on userId
-        router.put("/app/user/:userId", this.IsUserAuthenticated, function (req, res) {
+        router.put("/app/user/:userId", function (req, res) {
             console.log();
             var userId = +req.params.userId;
             console.log("Update information of a user with userId = ", userId);
