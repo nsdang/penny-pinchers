@@ -134,7 +134,7 @@ class App {
     });
 
     // post an item
-    router.post("/app/item/",this.IsUserAuthenticated, (req, res) => {
+    router.post("/app/item/",(req, res) => {
       console.log();
       console.log("Create a new item");
       console.log("Req.body: ", req.body);
@@ -168,7 +168,7 @@ class App {
     });
 
     // delete an item
-    router.delete("/app/item/:itemId/", this.IsUserAuthenticated,(req, res) => {
+    router.delete("/app/item/:itemId/", (req, res) => {
       var itemId: number = +req.params.itemId;
       this.SubscriptionItem.deleteItem(res, { itemId: itemId });
     });

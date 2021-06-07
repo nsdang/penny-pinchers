@@ -82,14 +82,14 @@ var App = /** @class */ (function () {
         });
         /********************************* ITEM ***********************************/
         // get all items using listId
-        router.get("/app/item/list/:listId", function (req, res) {
+        router.get("/app/item/list/:listId", this.IsUserAuthenticated, function (req, res) {
             console.log();
             var listid = +req.params.listId;
             console.log("Retrieve all items in the list with listId: ", listid);
             _this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
         });
         // get all items using userId
-        router.get("/app/item/user/:userId", function (req, res) {
+        router.get("/app/item/user/:userId", this.IsUserAuthenticated, function (req, res) {
             console.log();
             var userid = +req.params.userId;
             console.log("Retrieve all items in the list with userId: ", userid);
@@ -99,7 +99,7 @@ var App = /** @class */ (function () {
             });
         });
         // get specific item based on itemId
-        router.get("/app/item/:itemId", function (req, res) {
+        router.get("/app/item/:itemId", this.IsUserAuthenticated, function (req, res) {
             var itemid = +req.params.itemId;
             console.log(" itemid = ", itemid);
             _this.SubscriptionItem.retrieveItemDetails(res, { itemId: itemid });
@@ -124,7 +124,7 @@ var App = /** @class */ (function () {
             _this.idGenerator++;
         });
         // update existed item
-        router.put("/app/item/:itemId", function (req, res) {
+        router.put("/app/item/:itemId", this.IsUserAuthenticated, function (req, res) {
             var itemID = +req.params.itemId;
             var conditionDetail = { itemId: itemID };
             var updateDetail = req.body;
@@ -138,14 +138,14 @@ var App = /** @class */ (function () {
         });
         /*********************************** LIST ***********************************/
         // Retrieve a list's information (not including items) by userId
-        router.get("/app/list/user/:userId", function (req, res) {
+        router.get("/app/list/user/:userId", this.IsUserAuthenticated, function (req, res) {
             console.log();
             var userId = +req.params.userId;
             console.log("Retrieve a single list by userId: ", userId);
             _this.SubscriptionList.retrieveListInfo(res, { userId: userId });
         });
         // Modify a list by userId
-        router.put("/app/list/user/:userId", function (req, res) {
+        router.put("/app/list/user/:userId", this.IsUserAuthenticated, function (req, res) {
             console.log();
             var userid = +req.params.userId;
             console.log("Update list's information with userId = ", userid);
@@ -153,44 +153,44 @@ var App = /** @class */ (function () {
             _this.SubscriptionList.updateListInfo(res, { userId: userid }, req.body);
         });
         /************************************ USER *********************************/
-        // Create a new user
-        router.post("/app/user/", function (req, res) {
-            console.log();
-            console.log("Create a new user");
-            console.log("Req.body: ", req.body);
-            var jsonObj = req.body;
-            var userId = jsonObj.userId;
-            var userName = jsonObj.fname;
-            _this.User.model.create([jsonObj], function (err) {
-                if (err) {
-                    console.log("user creation failed");
-                }
-            });
-            // create a new list assigned to user
-            var listId = _this.idGenerator;
-            var userJsonObj = {
-                listId: listId,
-                name: userName + "'s List",
-                description: "",
-                userId: userId
-            };
-            _this.SubscriptionList.model.create([userJsonObj], function (err) {
-                if (err) {
-                    console.log("user creation failed");
-                }
-            });
-            res.send(_this.idGenerator.toString());
-            _this.idGenerator++;
-        });
+        // // Create a new user
+        // router.post("/app/user/", (req, res) => {
+        //   console.log();
+        //   console.log("Create a new user");
+        //   console.log("Req.body: ", req.body);
+        //   var jsonObj = req.body;
+        //   var userId = jsonObj.userId;
+        //   var userName = jsonObj.fname;
+        //   this.User.model.create([jsonObj], (err) => {
+        //     if (err) {
+        //       console.log("user creation failed");
+        //     }
+        //   });
+        //   // create a new list assigned to user
+        //   var listId = this.idGenerator;
+        //   var userJsonObj = {
+        //     listId: listId,
+        //     name: userName + "'s List",
+        //     description: "",
+        //     userId: userId,
+        //   };
+        //   this.SubscriptionList.model.create([userJsonObj], (err) => {
+        //     if (err) {
+        //       console.log("user creation failed");
+        //     }
+        //   });
+        //   res.send(this.idGenerator.toString());
+        //   this.idGenerator++;
+        // });
         // Retrieve a single user by userId
-        router.get("/app/user/:userId", function (req, res) {
+        router.get("/app/user/:userId", this.IsUserAuthenticated, function (req, res) {
             console.log();
             var userId = +req.params.userId;
             console.log("Retrieve info of a user with userId = ", userId);
             _this.User.retrieveASingleUser(res, { userId: userId });
         });
         // Modify a single user information based on userId
-        router.put("/app/user/:userId", function (req, res) {
+        router.put("/app/user/:userId", this.IsUserAuthenticated, function (req, res) {
             console.log();
             var userId = +req.params.userId;
             console.log("Update information of a user with userId = ", userId);
