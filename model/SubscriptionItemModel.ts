@@ -47,6 +47,20 @@ class SubscriptionItemModel {
     });
   }
 
+  // Return all items in database
+  public returnAllItems(): any {
+    var query = this.model.find();
+    return new Promise<any>((resolve, reject) => {
+      query.exec((err, items) => {
+        console.log("in reutnrAllItems", items);
+        if (err){
+          reject(new Error('failed to fetch all items'));
+        }
+        resolve(items);
+      });
+    });
+  }
+
   // Retrieve a single item detail
   public retrieveItemDetails(response: any, filter: Object): any {
     var query = this.model.findOne(filter);
