@@ -113,15 +113,16 @@ var App = /** @class */ (function () {
             var itemID;
             _this.SubscriptionItem.getLastItemId().then(function (resolve) {
                 itemID = resolve += 1;
+                console.log(itemID);
+                jsonObj.itemId = itemID;
+                _this.SubscriptionItem.model.create([jsonObj], function (err) {
+                    if (err) {
+                        console.log("item creation failed");
+                    }
+                });
+                res.send(_this.idGenerator.toString());
+                _this.idGenerator++;
             });
-            jsonObj.itemId = itemID;
-            _this.SubscriptionItem.model.create([jsonObj], function (err) {
-                if (err) {
-                    console.log("item creation failed");
-                }
-            });
-            res.send(_this.idGenerator.toString());
-            _this.idGenerator++;
         });
         // update existed item
         router.put("/app/item/:itemId", this.IsUserAuthenticated, function (req, res) {

@@ -67,6 +67,7 @@ var SubscriptionItemModel = /** @class */ (function () {
         var query = this.model.findOne().sort({ itemId: 'descending' });
         return new Promise(function (resolve, reject) {
             query.exec(function (err, item) {
+                console.log(item);
                 resolve(item.itemId);
             });
         });

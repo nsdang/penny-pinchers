@@ -87,7 +87,8 @@ class SubscriptionItemModel {
    public getLastItemId() : any {
     var query = this.model.findOne().sort({itemId : 'descending'});
     return new Promise((resolve, reject) => {
-        query.exec((err, item) => {      
+        query.exec((err, item) => {    
+          console.log(item);  
            resolve(item.itemId);
         });
      })

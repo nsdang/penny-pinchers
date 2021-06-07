@@ -142,16 +142,18 @@ class App {
       var itemID;
       this.SubscriptionItem.getLastItemId().then((resolve) => {
           itemID = resolve += 1;
-      });
-
-      jsonObj.itemId = itemID; 
-      this.SubscriptionItem.model.create([jsonObj], (err) => {
-        if (err) {
-          console.log("item creation failed");
-        }
+          console.log(itemID);
+          jsonObj.itemId = itemID;
+          this.SubscriptionItem.model.create([jsonObj], (err) => {
+          if (err) {
+            console.log("item creation failed");
+          }
       });
       res.send(this.idGenerator.toString());
       this.idGenerator++;
+      });
+
+      
     });
 
     // update existed item
