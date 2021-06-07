@@ -34,18 +34,15 @@ var App = /** @class */ (function () {
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
-        // this.expressApp.use((req, res, next) => {
-        //   res.header("Access-Control-Allow-Origin", "*");
-        //   res.header("Access-Control-Allow-Headers", "*");
-        //   if (req.method === "OPTIONS") {
-        //     res.header(
-        //       "Access-Control-Allow-Methods",
-        //       "PUT, POST, PATCH, DELETE, GET"
-        //     );
-        //     return res.status(200).json({});
-        //   }
-        //   next();
-        // });
+        this.expressApp.use(function (req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "*");
+            if (req.method === "OPTIONS") {
+                res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+                return res.status(200).json({});
+            }
+            next();
+        });
         this.expressApp.use(logger("dev"));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
@@ -164,35 +161,6 @@ var App = /** @class */ (function () {
             _this.SubscriptionList.updateListInfo(res, { userId: userid }, req.body);
         });
         /************************************ USER *********************************/
-        // // Create a new user
-        // router.post("/app/user/", (req, res) => {
-        //   console.log();
-        //   console.log("Create a new user");
-        //   console.log("Req.body: ", req.body);
-        //   var jsonObj = req.body;
-        //   var userId = jsonObj.userId;
-        //   var userName = jsonObj.fname;
-        //   this.User.model.create([jsonObj], (err) => {
-        //     if (err) {
-        //       console.log("user creation failed");
-        //     }
-        //   });
-        //   // create a new list assigned to user
-        //   var listId = this.idGenerator;
-        //   var userJsonObj = {
-        //     listId: listId,
-        //     name: userName + "'s List",
-        //     description: "",
-        //     userId: userId,
-        //   };
-        //   this.SubscriptionList.model.create([userJsonObj], (err) => {
-        //     if (err) {
-        //       console.log("user creation failed");
-        //     }
-        //   });
-        //   res.send(this.idGenerator.toString());
-        //   this.idGenerator++;
-        // });
         // Retrieve a single user by userId
         router.get("/app/user/:userId", function (req, res) {
             console.log();
