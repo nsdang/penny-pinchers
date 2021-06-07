@@ -194,7 +194,7 @@ class App {
     // Retrieve a list's information (not including items) by userId
     router.get("/app/list/user/:userId", (req, res) => {
       console.log();
-      var userId: number = +req.params.userId;
+      var userId = req.params.userId;
       console.log("Retrieve a single list by userId: ", userId);
       this.SubscriptionList.retrieveListInfo(res, { userId: userId });
     });
@@ -202,7 +202,7 @@ class App {
     // Modify a list by userId
     router.put("/app/list/user/:userId", (req, res) => {
       console.log();
-      var userid: number = +req.params.userId;
+      var userid = req.params.userId;
       console.log("Update list's information with userId = ", userid);
       console.log("Req.body: ", req.body);
       this.SubscriptionList.updateListInfo(res, { userId: userid }, req.body);
@@ -246,7 +246,7 @@ class App {
     // Retrieve a single user by userId
     router.get("/app/user/:userId", (req, res) => {
       console.log();
-      var userId: number = +req.params.userId;
+      var userId = req.params.userId;
       console.log("Retrieve info of a user with userId = ", userId);
       this.User.retrieveASingleUser(res, { userId: userId });
     });
@@ -254,7 +254,7 @@ class App {
     // Modify a single user information based on userId
     router.put("/app/user/:userId", (req, res) => {
       console.log();
-      var userId: number = +req.params.userId;
+      var userId = req.params.userId;
       console.log("Update information of a user with userId = ", userId);
       console.log("Req.body: ", req.body);
       this.User.updateUserInfo(res, { userId: userId }, req.body);
