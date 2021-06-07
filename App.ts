@@ -127,7 +127,7 @@ class App {
     });
 
     // get specific item based on itemId
-    router.get("/app/item/:itemId", this.IsUserAuthenticated, (req, res) => {
+    router.get("/app/item/:itemId", (req, res) => {
       var itemid: number = +req.params.itemId;
       console.log(" itemid = ", itemid);
       this.SubscriptionItem.retrieveItemDetails(res, { itemId: itemid });
@@ -168,7 +168,7 @@ class App {
     });
 
     // delete an item
-    router.delete("/app/item/:itemId/", (req, res) => {
+    router.delete("/app/item/:itemId/", this.IsUserAuthenticated, (req, res) => {
       var itemId: number = +req.params.itemId;
       this.SubscriptionItem.deleteItem(res, { itemId: itemId });
     });

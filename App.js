@@ -99,7 +99,7 @@ var App = /** @class */ (function () {
             });
         });
         // get specific item based on itemId
-        router.get("/app/item/:itemId", this.IsUserAuthenticated, function (req, res) {
+        router.get("/app/item/:itemId", function (req, res) {
             var itemid = +req.params.itemId;
             console.log(" itemid = ", itemid);
             _this.SubscriptionItem.retrieveItemDetails(res, { itemId: itemid });
@@ -132,7 +132,7 @@ var App = /** @class */ (function () {
             _this.SubscriptionItem.updateItemDetails(res, conditionDetail, updateDetail);
         });
         // delete an item
-        router["delete"]("/app/item/:itemId/", function (req, res) {
+        router["delete"]("/app/item/:itemId/", this.IsUserAuthenticated, function (req, res) {
             var itemId = +req.params.itemId;
             _this.SubscriptionItem.deleteItem(res, { itemId: itemId });
         });
