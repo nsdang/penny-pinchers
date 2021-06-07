@@ -48,7 +48,7 @@ class App {
   // Configure Express middleware.
   private middleware(): void {
     this.expressApp.use((req, res, next) => {
-      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Origin", "https://pennypinchers.azurewebsites.net/");
       res.header("Access-Control-Allow-Headers", "*");
       if (req.method === "OPTIONS") {
         res.header(
@@ -75,14 +75,14 @@ class App {
 
   // Check if user is already authenticated
   private IsUserAuthenticated(req, res, next):void {
-   // console.log(req);
+    console.log("hello");
     if(req.isAuthenticated()) {
       console.log("User is already authenticated");
       return next();
-    } else {
-      console.log("User is not yet authenticated");
-      res.redirect("/"); 
-    }
+    } 
+    console.log("User is not yet authenticated");
+    res.redirect("/"); 
+    
   }
 
   // Configure API endpoints.

@@ -35,7 +35,7 @@ var App = /** @class */ (function () {
     // Configure Express middleware.
     App.prototype.middleware = function () {
         this.expressApp.use(function (req, res, next) {
-            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Origin", "https://pennypinchers.azurewebsites.net/");
             res.header("Access-Control-Allow-Headers", "*");
             if (req.method === "OPTIONS") {
                 res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
@@ -56,15 +56,13 @@ var App = /** @class */ (function () {
     };
     // Check if user is already authenticated
     App.prototype.IsUserAuthenticated = function (req, res, next) {
-        // console.log(req);
+        console.log("hello");
         if (req.isAuthenticated()) {
             console.log("User is already authenticated");
             return next();
         }
-        else {
-            console.log("User is not yet authenticated");
-            res.redirect("/");
-        }
+        console.log("User is not yet authenticated");
+        res.redirect("/");
     };
     // Configure API endpoints.
     App.prototype.routes = function () {
