@@ -61,6 +61,7 @@ class App {
     });
     this.expressApp.use(logger("dev"));
     this.expressApp.use(bodyParser.json());
+   
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
     this.expressApp.use(session(
       {secret : 'secret text',
@@ -74,7 +75,7 @@ class App {
 
   // Check if user is already authenticated
   private IsUserAuthenticated(req, res, next):void {
-    req.session.cookie.httpOnly = false;
+   // console.log(req);
     if(req.isAuthenticated()) {
       console.log("User is already authenticated");
       return next();

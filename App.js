@@ -56,7 +56,7 @@ var App = /** @class */ (function () {
     };
     // Check if user is already authenticated
     App.prototype.IsUserAuthenticated = function (req, res, next) {
-        req.session.cookie.httpOnly = false;
+        // console.log(req);
         if (req.isAuthenticated()) {
             console.log("User is already authenticated");
             return next();
