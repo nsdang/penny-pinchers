@@ -16,6 +16,8 @@ import { SubscriptionItemModel } from "./model/SubscriptionItemModel";
 import { UserModel } from "./model/UserModel";
 import { profile } from "node:console";
 import * as EmailReminder from "./utils/recurCheckPayDay.js";
+import Keys from "./model/GooglePassportConfig/Keys"
+
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -60,7 +62,11 @@ class App {
     this.expressApp.use(logger("dev"));
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
-    this.expressApp.use(session({secret : 'test'}));
+    this.expressApp.use(session(
+      {secret : 'secret text',
+      resave: true,
+      saveUnitialized: true
+    }));
     this.expressApp.use(cookieParser());
     this.expressApp.use(passport.initialize());
     this.expressApp.use(passport.session());
@@ -68,6 +74,7 @@ class App {
 
   // Check if user is already authenticated
   private IsUserAuthenticated(req, res, next):void {
+    req.session.cookie.httpOnly = false;
     if(req.isAuthenticated()) {
       console.log("User is already authenticated");
       return next();

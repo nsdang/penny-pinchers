@@ -46,13 +46,17 @@ var App = /** @class */ (function () {
         this.expressApp.use(logger("dev"));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
-        this.expressApp.use(session({ secret: 'test' }));
+        this.expressApp.use(session({ secret: 'secret text',
+            resave: true,
+            saveUnitialized: true
+        }));
         this.expressApp.use(cookieParser());
         this.expressApp.use(passport.initialize());
         this.expressApp.use(passport.session());
     };
     // Check if user is already authenticated
     App.prototype.IsUserAuthenticated = function (req, res, next) {
+        req.session.cookie.httpOnly = false;
         if (req.isAuthenticated()) {
             console.log("User is already authenticated");
             return next();
