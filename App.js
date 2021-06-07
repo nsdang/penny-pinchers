@@ -99,7 +99,7 @@ var App = /** @class */ (function () {
             _this.SubscriptionItem.retrieveAllItems(res, { listId: listid });
         });
         // get all items using userId
-        router.get("/app/item/user/:userId", this.IsUserAuthenticated, function (req, res) {
+        router.get("/app/item/user/:userId", function (req, res) {
             console.log();
             var userid = req.params.userId;
             console.log("Retrieve all items in the list with userId: ", userid);
