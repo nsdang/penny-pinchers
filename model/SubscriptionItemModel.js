@@ -62,6 +62,15 @@ var SubscriptionItemModel = /** @class */ (function () {
             response.json(mongooseDeleteResult);
         });
     };
+    // retrieve last itemId
+    SubscriptionItemModel.prototype.getLastItemId = function () {
+        var query = this.model.findOne().sort({ itemId: 'descending' });
+        return new Promise(function (resolve, reject) {
+            query.exec(function (err, item) {
+                resolve(item.itemId);
+            });
+        });
+    };
     return SubscriptionItemModel;
 }());
 exports.SubscriptionItemModel = SubscriptionItemModel;

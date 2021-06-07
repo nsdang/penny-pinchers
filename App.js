@@ -110,7 +110,11 @@ var App = /** @class */ (function () {
             console.log("Create a new item");
             console.log("Req.body: ", req.body);
             var jsonObj = req.body;
-            //jsonObj.listId = this.idGenerator;
+            var itemID;
+            _this.SubscriptionItem.getLastItemId().then(function (resolve) {
+                itemID = resolve += 1;
+            });
+            jsonObj.itemId = itemID;
             _this.SubscriptionItem.model.create([jsonObj], function (err) {
                 if (err) {
                     console.log("item creation failed");

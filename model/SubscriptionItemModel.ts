@@ -82,5 +82,15 @@ class SubscriptionItemModel {
       response.json(mongooseDeleteResult);
     });
   }
+
+   // retrieve last itemId
+   public getLastItemId() : any {
+    var query = this.model.findOne().sort({itemId : 'descending'});
+    return new Promise((resolve, reject) => {
+        query.exec((err, item) => {      
+           resolve(item.itemId);
+        });
+     })
+  }
 }
 export { SubscriptionItemModel };
