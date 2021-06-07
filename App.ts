@@ -12,8 +12,8 @@ import GooglePassport from './model/GooglePassportConfig/GooglePassport'
 import { SubscriptionListModel } from "./model/SubscriptionListModel";
 import { SubscriptionItemModel } from "./model/SubscriptionItemModel";
 import { UserModel } from "./model/UserModel";
-import { sendEmail } from "./utils/sendEmail";
 import { profile } from "node:console";
+import * as EmailReminder from "./utils/recurCheckPayDay.js";
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -24,18 +24,21 @@ class App {
   public User: UserModel;
   public idGenerator: number;
   public googlePassportConfig:GooglePassport;
+  public EmailReminder: any;
 
   //Run configuration methods on the Express instance.
   constructor() {
     this.User = new UserModel();
     this.SubscriptionList = new SubscriptionListModel();
     this.SubscriptionItem = new SubscriptionItemModel();
+    this.EmailReminder = new EmailReminder();
     this.googlePassportConfig = new GooglePassport(this.User, this.SubscriptionList);
     this.expressApp = express();
     this.middleware();
     this.routes();
     this.idGenerator = 102;
 
+    this.EmailReminder.recurCheckPayDay(this.SubscriptionItem)
   }
 
   // Configure Express middleware.
@@ -250,7 +253,7 @@ class App {
       var jsonObj = req.body;
       console.log(jsonObj);
 
-      sendEmail({ subscription: jsonObj.subscription, client: jsonObj.client });
+      this.EmailReminder.sendEmail({ subscription: jsonObj.subscription, client: jsonObj.client });
       res.send("DOne");
     });
 

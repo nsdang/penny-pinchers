@@ -14,7 +14,7 @@ var GooglePassport_1 = require("./model/GooglePassportConfig/GooglePassport");
 var SubscriptionListModel_1 = require("./model/SubscriptionListModel");
 var SubscriptionItemModel_1 = require("./model/SubscriptionItemModel");
 var UserModel_1 = require("./model/UserModel");
-var sendEmail_1 = require("./utils/sendEmail");
+var EmailReminder = require("./utils/recurCheckPayDay.js");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
@@ -22,11 +22,13 @@ var App = /** @class */ (function () {
         this.User = new UserModel_1.UserModel();
         this.SubscriptionList = new SubscriptionListModel_1.SubscriptionListModel();
         this.SubscriptionItem = new SubscriptionItemModel_1.SubscriptionItemModel();
+        this.EmailReminder = new EmailReminder();
         this.googlePassportConfig = new GooglePassport_1["default"](this.User, this.SubscriptionList);
         this.expressApp = express();
         this.middleware();
         this.routes();
         this.idGenerator = 102;
+        this.EmailReminder.recurCheckPayDay(this.SubscriptionItem);
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
@@ -202,7 +204,7 @@ var App = /** @class */ (function () {
         router.post("/app/sendemail/", function (req, res) {
             var jsonObj = req.body;
             console.log(jsonObj);
-            sendEmail_1.sendEmail({ subscription: jsonObj.subscription, client: jsonObj.client });
+            _this.EmailReminder.sendEmail({ subscription: jsonObj.subscription, client: jsonObj.client });
             res.send("DOne");
         });
         this.expressApp.use("/", router);
