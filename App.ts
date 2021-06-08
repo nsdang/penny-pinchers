@@ -47,18 +47,18 @@ class App {
 
   // Configure Express middleware.
   private middleware(): void {
-    // this.expressApp.use((req, res, next) => {
-    //   res.header("Access-Control-Allow-Origin", "*");
-    //   res.header("Access-Control-Allow-Headers", "*");
-    //   if (req.method === "OPTIONS") {
-    //     res.header(
-    //       "Access-Control-Allow-Methods",
-    //       "PUT, POST, PATCH, DELETE, GET"
-    //     );
-    //     return res.status(200).json({});
-    //   }
-    //   next();
-    // });
+    this.expressApp.use((req, res, next) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "*");
+      if (req.method === "OPTIONS") {
+        res.header(
+          "Access-Control-Allow-Methods",
+          "PUT, POST, PATCH, DELETE, GET"
+        );
+        return res.status(200).json({});
+      }
+      next();
+    });
     this.expressApp.use(logger("dev"));
     this.expressApp.use(bodyParser.json());
    
@@ -120,7 +120,7 @@ class App {
 
     /********************************* ITEM ***********************************/
     // get all items using listId
-    router.get("/app/item/list/:listId", (req, res) => {
+    router.get("/app/item/list/:listId", this.IsUserAuthenticated, (req, res) => {
       console.log();
       var listid: number = +req.params.listId;
       console.log("Retrieve all items in the list with listId: ", listid);
@@ -128,7 +128,7 @@ class App {
     });
 
     // get all items using userId
-    router.get("/app/item/user/:userId", this.IsUserAuthenticated, (req, res) => {
+    router.get("/app/item/user/:userId", (req, res) => {
       console.log();
       var userid = req.params.userId;
       console.log("Retrieve all items in the list with userId: ", userid);
@@ -208,40 +208,6 @@ class App {
     });
 
     /************************************ USER *********************************/
-    // // Create a new user
-    // router.post("/app/user/", (req, res) => {
-    //   console.log();
-    //   console.log("Create a new user");
-    //   console.log("Req.body: ", req.body);
-    //   var jsonObj = req.body;
-    //   var userId = jsonObj.userId;
-    //   var userName = jsonObj.fname;
-
-    //   this.User.model.create([jsonObj], (err) => {
-    //     if (err) {
-    //       console.log("user creation failed");
-    //     }
-    //   });
-
-    //   // create a new list assigned to user
-    //   var listId = this.idGenerator;
-    //   var userJsonObj = {
-    //     listId: listId,
-    //     name: userName + "'s List",
-    //     description: "",
-    //     userId: userId,
-    //   };
-
-    //   this.SubscriptionList.model.create([userJsonObj], (err) => {
-    //     if (err) {
-    //       console.log("user creation failed");
-    //     }
-    //   });
-
-    //   res.send(this.idGenerator.toString());
-    //   this.idGenerator++;
-    // });
-
     // Retrieve a single user by userId
     router.get("/app/user/:userId", (req, res) => {
       console.log();
