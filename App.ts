@@ -120,7 +120,7 @@ class App {
 
     /********************************* ITEM ***********************************/
     // get all items using listId
-    router.get("/app/item/list/:listId", (req, res) => {
+    router.get("/app/item/list/:listId", this.IsUserAuthenticated, (req, res) => {
       console.log();
       var listid: number = +req.params.listId;
       console.log("Retrieve all items in the list with listId: ", listid);
@@ -128,7 +128,7 @@ class App {
     });
 
     // get all items using userId
-    router.get("/app/item/user/:userId", this.IsUserAuthenticated, (req, res) => {
+    router.get("/app/item/user/:userId", (req, res) => {
       console.log();
       var userid = req.params.userId;
       console.log("Retrieve all items in the list with userId: ", userid);
